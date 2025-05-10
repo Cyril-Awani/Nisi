@@ -1,10 +1,13 @@
 'use client';
 
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
+import YearlyPlansModal from '@/components/PlansModal';
 
 export default function PlansPage() {
+  const [showModal, setShowModal] = useState(false);
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -161,12 +164,20 @@ export default function PlansPage() {
                     Free premium router included
                   </li>
                 </ul>
-                <Link
-                  href="/yearly-plans"
-                  className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
-                >
-                  View Yearly Plans
-                </Link>
+                <button 
+        onClick={() => setShowModal(true)}
+className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
+      >
+        View Yearly Plans
+      </button>
+
+      <YearlyPlansModal 
+        isOpen={showModal} 
+        onClose={() => setShowModal(false)} 
+      />
+                <div>
+      
+    </div>
               </div>
             </motion.div>
           </div>
