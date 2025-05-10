@@ -16,46 +16,33 @@ export default function PlansPage() {
 
   const plans = [
     {
-      name: "Home",
-      description: "Homes & Casual Users",
-      price: "$29.99",
-      annualPrice: "$360/year",
-      features: [
-        "100 Mbps Download Speed",
-        "Unlimited Data Usage",
-        "Free Wi-Fi Router",
-        "24/7 Technical Support"
-      ],
-      cta: "Get A Plan",
-      popular: false
+      name: "Basic",
+      speed: "5 Mbps",
+      devices: "Up to 5 Devices",
+      price: "₦13,922/mo",
+      features: ["Unlimited data", "Free installation", "24/7 support"]
     },
     {
-      name: "Business",
-      description: "Small & Medium Businesses",
-      price: "$99.99",
-      annualPrice: "$1,199/year",
-      features: [
-        "500 Mbps Download Speed",
-        "Unlimited Data with SLA",
-        "Business-Class Wi-Fi Router",
-        "Dedicated Customer Portal"
-      ],
-      cta: "Get A Plan",
+      name: "Standard",
+      speed: "10 Mbps",
+      devices: "Up to 10 Devices",
+      price: "₦18,222/mo",
+      features: ["Unlimited data", "Free modem", "Priority support"],
       popular: true
     },
     {
-      name: "Enterprise",
-      description: "Large Enterprises & ISPs",
-      price: "$399.99",
-      annualPrice: "$4,799/year",
-      features: [
-        "1 Gbps+ Dedicated Bandwidth",
-        "Multi-Location Connectivity",
-        "Redundant Backup Connection",
-        "Customizable Security Suite"
-      ],
-      cta: "Get A Plan",
-      popular: false
+      name: "Premium",
+      speed: "20 Mbps",
+      devices: "Up to 20 Devices",
+      price: "₦38,499/mo",
+      features: ["Unlimited data", "Free modem & router", "VIP support"]
+    },
+     {
+      name: "Premium",
+      speed: "50 Mbps",
+      devices: "Up to 50 Devices",
+      price: "₦50,000/mo",
+      features: ["Unlimited data", "Free modem & router", "VVIP support"]
     }
   ];
 
