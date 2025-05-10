@@ -2,28 +2,32 @@ export default function PlansGrid() {
   const plans = [
     {
       name: "Basic",
-      speed: "50 Mbps",
-      price: "$29.99/mo",
+      speed: "5 Mbps",
+      devices: "Up to 5 Devices",
+      price: "₦13,922/mo",
       features: ["Unlimited data", "Free installation", "24/7 support"]
     },
     {
       name: "Standard",
-      speed: "100 Mbps",
-      price: "$49.99/mo",
+      speed: "10 Mbps",
+      devices: "Up to 10 Devices",
+      price: "₦18,222/mo",
       features: ["Unlimited data", "Free modem", "Priority support"],
       popular: true
     },
     {
       name: "Premium",
-      speed: "500 Mbps",
-      price: "$79.99/mo",
+      speed: "20 Mbps",
+      devices: "Up to 20 Devices",
+      price: "₦38,499/mo",
       features: ["Unlimited data", "Free modem & router", "VIP support"]
     },
      {
       name: "Premium",
-      speed: "500 Mbps",
-      price: "$79.99/mo",
-      features: ["Unlimited data", "Free modem & router", "VIP support"]
+      speed: "50 Mbps",
+      devices: "Up to 50 Devices",
+      price: "₦50,000/mo",
+      features: ["Unlimited data", "Free modem & router", "VVIP support"]
     }
   ];
 
@@ -40,7 +44,7 @@ export default function PlansGrid() {
             </div>
           )}
           <h3 className="text-2xl font-bold mb-1">{plan.name}</h3>
-          <p className="text-[14px] font-normal mb-4">Suitable for up-to 5 Devices</p>
+          <p className="text-[14px] font-normal mb-4">{plan.devices}</p>
           <p className="text-4xl font-bold mb-4">{plan.price}</p>
           <p className="text-lg mb-6">{plan.speed} Download Speed</p>
           <ul className="space-y-2 mb-6">
