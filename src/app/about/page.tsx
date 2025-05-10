@@ -82,8 +82,9 @@ export default function AboutPage() {
                 Founded in 2015, NISI Technologies began with a simple mission: to bridge the digital divide in Delta State by providing affordable, reliable internet access. What started as a small local provider has grown into a regional leader in internet services.
               </p>
               <p className="text-gray-600 mb-6">
-                Today, we serve thousands of homes and businesses across multiple states, continually investing in our network infrastructure to deliver cutting-edge connectivity solutions.
-              </p>
+  Today, we serve thousands of homes and businesses across multiple states, continually investing in our network infrastructure to deliver cutting-edge connectivity solutions.
+</p>
+
               <Link 
                 href="/coverage" 
                 className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition"
@@ -121,7 +122,7 @@ export default function AboutPage() {
               {
                 title: "Community Focus",
                 icon: "🤝",
-                description: "As a locally-owned business, we're committed to the economic growth and digital inclusion of our communities."
+                description: "As a locally-owned business, we&apos;re committed to the economic growth and digital inclusion of our communities."
               },
               {
                 title: "Innovation Driven",
@@ -156,8 +157,9 @@ export default function AboutPage() {
           >
             <motion.h2 variants={fadeIn} className="text-3xl font-bold mb-4">Meet Our Leadership</motion.h2>
             <motion.p variants={fadeIn} className="text-gray-600 max-w-3xl mx-auto">
-              The passionate team driving NISI's vision forward
-            </motion.p>
+  The passionate team driving NISI&apos;s vision forward
+</motion.p>
+
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">

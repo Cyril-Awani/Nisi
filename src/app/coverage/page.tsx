@@ -146,9 +146,9 @@ export default function CoveragePage() {
               viewport={{ once: true }}
               className="text-center mb-12"
             >
-              <h2 className="text-3xl font-bold mb-4">Can't Find Your Area?</h2>
+              <h2 className="text-3xl font-bold mb-4">Can&apos;t Find Your Area?</h2>
               <p className="text-gray-600">
-                If your area isn't listed, contact us to explore upcoming expansions or alternative solutions for connectivity.
+                If your area isn&apos;t listed, contact us to explore upcoming expansions or alternative solutions for connectivity.
               </p>
             </motion.div>
 
@@ -196,7 +196,7 @@ export default function CoveragePage() {
                   <label className="block text-gray-700 mb-2">Message</label>
                   <textarea 
                     placeholder="Write your message or questions here"
-                    rows={4} // Pass the value as a number
+                    rows={4}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
                   ></textarea>
                 </div>
@@ -270,7 +270,7 @@ export default function CoveragePage() {
           >
             <h2 className="text-3xl font-bold mb-6">Get Started Today</h2>
             <p className="text-xl mb-8 max-w-3xl mx-auto">
-              Check if NISI's high-speed internet is available in your location
+              Check if NISI&apos;s high-speed internet is available in your location
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Link
