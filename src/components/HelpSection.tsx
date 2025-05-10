@@ -7,17 +7,17 @@ const faqItems = [
 	{
 		question: 'How long does it take to install the service?',
 		answer:
-			'Installation typically takes 2-4 hours depending on your location and setup requirements. Our technician will provide a more accurate timeframe during the site survey.',
+			'Installation typically takes 2-5 days after confirmation depending on your location and setup requirements. Our technician will provide a more accurate timeframe during the site survey.',
 	},
 	{
 		question: 'What equipment do I need to get started?',
 		answer:
-			'We provide all necessary equipment including a modem and router. You\'ll just need a power outlet and a device to connect (computer, phone, etc.).',
+			"We provide all necessary equipment including a modem and router. You'll just need a power outlet and a device to connect (computer, phone, etc.).",
 	},
 	{
 		question: 'What is your customer service policy?',
 		answer:
-			'We offer 24/7 customer support with a guaranteed response time of under 30 minutes for critical issues. Our standard support hours are 8am-10pm daily.',
+			'We offer 24/7 customer support with a guaranteed response time of under 30 minutes for critical issues. Our standard support hours are 9am-5pm daily.',
 	},
 	{
 		question: 'What if I have a problem with my internet connection?',
@@ -54,14 +54,10 @@ export default function HelpSection() {
 										className="w-full flex justify-between items-center p-4 text-left bg-white hover:bg-gray-50 transition"
 										onClick={() => toggleAccordion(index)}
 									>
-										<span className="font-medium text-lg">
-											{item.question}
-										</span>
+										<span className="font-medium text-lg">{item.question}</span>
 										<svg
-											className={`w-5 h-5 transition-transform ${
-												activeIndex === index
-													? 'transform rotate-180'
-													: ''
+											className={`w-5 h-5 transition-transform${
+												activeIndex === index ? 'transform rotate-180' : ''
 											}`}
 											fill="none"
 											stroke="currentColor"
@@ -77,9 +73,7 @@ export default function HelpSection() {
 									</button>
 									<div
 										className={`bg-gray-50 px-4 overflow-hidden transition-all duration-300 ${
-											activeIndex === index
-												? 'max-h-40 py-4'
-												: 'max-h-0 py-0'
+											activeIndex === index ? 'max-h-40 py-4' : 'max-h-0 py-0'
 										}`}
 									>
 										<p className="text-gray-600">{item.answer}</p>
@@ -90,11 +84,9 @@ export default function HelpSection() {
 					</div>
 
 					{/* Help Section - Right Side */}
-					<div className="lg:w-1/2 bg-blue-800 text-white p-8 rounded-lg">
+					<div className="lg:w-1/2 bg-purple-800 text-white p-8 rounded-lg">
 						<div className="max-w-md mx-auto lg:mx-0">
-							<h3 className="text-2xl font-bold mb-4">
-								Still Need Our Help?
-							</h3>
+							<h3 className="text-2xl font-bold mb-4">Still Need Our Help?</h3>
 							<p className="mb-6">
 								Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 								eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -102,7 +94,7 @@ export default function HelpSection() {
 							<div className="flex flex-col sm:flex-row gap-4">
 								<Link
 									href="/contact"
-									className="flex-1 bg-white text-blue-800 px-6 py-3 rounded-lg font-semibold hover:bg-blue-100 transition text-center"
+									className="flex-1 bg-white text-purple-800 px-6 py-3 rounded-lg font-semibold hover:bg-purple-100 transition text-center"
 								>
 									Contact Us
 								</Link>
