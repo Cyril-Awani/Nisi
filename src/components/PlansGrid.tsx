@@ -1,5 +1,16 @@
+import React from 'react';
+
+interface Plan {
+	name: string;
+	speed: string;
+	devices: string;
+	price: string;
+	features: string[];
+	popular?: boolean;
+}
+
 export default function PlansGrid() {
-	const plans = [
+	const plans: Plan[] = [
 		{
 			name: 'Bronze',
 			speed: '5 Mbps',
@@ -31,7 +42,7 @@ export default function PlansGrid() {
 		},
 	];
 
-	const getGradientClass = (planName) => {
+	const getGradientClass = (planName: string): string => {
 		switch (planName) {
 			case 'Bronze':
 				return 'bg-gradient-to-r from-[#cd7f32] to-[#a97142]'; // Bronze shades
@@ -78,7 +89,7 @@ export default function PlansGrid() {
 										strokeLinejoin="round"
 										strokeWidth="2"
 										d="M5 13l4 4L19 7"
-									></path>
+									/>
 								</svg>
 								{feature}
 							</li>
