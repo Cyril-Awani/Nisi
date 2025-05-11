@@ -21,7 +21,7 @@ export default function Hero() {
 						href="/coverage"
 						className="border-2 border-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-800"
 					>
-						Check Coverage Availability
+						Check Coverage <span className="hidden md:flex">Availability</span>
 					</Link>
 				</div>
 			</div>
