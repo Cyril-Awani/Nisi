@@ -180,9 +180,9 @@ export default function InternetSignupProgress() {
 			if (addon === 'extraWire') {
 				newAddons.extraWire.meters = Math.max(0, value);
 			} else {
-				// @ts-ignore
+				// @ts-expect-error
 				newAddons[addon].quantity = Math.max(0, value);
-				// @ts-ignore
+				// @ts-expect-error
 				newAddons[addon].selected = value > 0;
 			}
 			return { ...prev, addons: newAddons };
@@ -812,7 +812,7 @@ export default function InternetSignupProgress() {
 										Flutterwave Payment
 									</h3>
 									<p className="text-sm mb-4">
-										You'll be redirected to Flutterwave's secure payment page to
+										You`ll be redirected to Flutterwave`s secure payment page to
 										complete your transaction.
 									</p>
 									<button
