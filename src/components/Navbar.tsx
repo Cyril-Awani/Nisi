@@ -57,8 +57,11 @@ export default function Navbar() {
 								alt="NISI Logo"
 								width={80}
 								height={40}
+								className="w-16 h-auto md:w-20" // mobile smaller, medium screens normal
 							/>
-							<h1 className="text-3xl mt-2 font-sans">TECHNOLOGIES</h1>
+							<h1 className="text-xl md:text-3xl mt-2 md:mt-2 font-sans">
+								TECHNOLOGIES
+							</h1>
 						</Link>
 					</div>
 
