@@ -156,7 +156,7 @@ export default function InternetSignupProgress() {
 				const today = new Date();
 				const workingDaysToAdd = 5;
 				let addedDays = 0;
-				let potentialDate = new Date(today);
+				const potentialDate = new Date(today);
 
 				while (addedDays < workingDaysToAdd) {
 					potentialDate.setDate(potentialDate.getDate() + 1);
