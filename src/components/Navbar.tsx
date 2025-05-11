@@ -180,7 +180,7 @@ export default function Navbar() {
 								</motion.div>
 
 								<motion.div variants={linkVariants}>
-									<ClientLoginModal />
+									<ClientLoginModal onLoginOpen={() => setIsMenuOpen(false)} />
 								</motion.div>
 							</motion.div>
 						</motion.div>
