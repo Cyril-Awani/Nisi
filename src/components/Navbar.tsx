@@ -79,7 +79,7 @@ export default function Navbar() {
 
 						<div className="h-6 w-px bg-white mx-2"></div>
 
-						<ClientLoginModal onLoginOpen={() => setIsMenuOpen(false)} />
+						<ClientLoginModal onAction={() => setIsMenuOpen(false)} />
 					</div>
 
 					{/* Mobile menu button */}
@@ -180,7 +180,7 @@ export default function Navbar() {
 								</motion.div>
 
 								<motion.div variants={linkVariants}>
-									<ClientLoginModal onLoginOpen={() => setIsMenuOpen(false)} />
+									<ClientLoginModal onAction={() => setIsMenuOpen(false)} />
 								</motion.div>
 							</motion.div>
 						</motion.div>
