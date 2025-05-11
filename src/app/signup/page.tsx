@@ -180,9 +180,9 @@ export default function InternetSignupProgress() {
 			if (addon === 'extraWire') {
 				newAddons.extraWire.meters = Math.max(0, value);
 			} else {
-				// @ts-expect-error
+				// @ts-expect-error - Dynamically accessing addon properties is safe here
 				newAddons[addon].quantity = Math.max(0, value);
-				// @ts-expect-error
+				// @ts-expect-error - Dynamically accessing addon properties is safe here
 				newAddons[addon].selected = value > 0;
 			}
 			return { ...prev, addons: newAddons };
