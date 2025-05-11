@@ -3,10 +3,10 @@ export default function Hero() {
 	return (
 		<section className="bg-purple-900 text-white py-20">
 			<div className="container mx-auto text-center">
-				<h1 className="text-4xl md:text-6xl font-bold mb-6">
+				<h1 className="text:lg text-4xl md:text-6xl font-bold mb-6">
 					Lightning Fast Internet for Your Home
 				</h1>
-				<p className="text-xl mb-8 max-w-2xl mx-auto">
+				<p className="italic text-lg md:text-xl mb-8 max-w-2xl mx-auto">
 					NISI delivers reliable, high-speed internet to keep you connected with
 					what matters most.
 				</p>
