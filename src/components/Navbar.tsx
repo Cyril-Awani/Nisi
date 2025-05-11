@@ -45,6 +45,26 @@ export default function Navbar() {
 		},
 	};
 
+	const NavLink = ({ href, children }: { href: string; children: string }) => (
+		<motion.div className="relative" whileHover="hover" initial="initial">
+			<Link
+				href={href}
+				className="text-white hover:text-purple-200 px-1 py-2 block"
+			>
+				{children}
+			</Link>
+			<motion.div
+				className="absolute bottom-0 left-0 w-full h-0.5 bg-white"
+				variants={{
+					hover: { scaleX: 1 },
+					initial: { scaleX: 0 },
+				}}
+				transition={{ duration: 0.3, ease: 'easeOut' }}
+				style={{ originX: 0 }}
+			/>
+		</motion.div>
+	);
+
 	return (
 		<nav className="bg-purple-800 text-white sticky top-0 z-50 shadow-md">
 			<div className="container mx-auto px-4">
@@ -57,7 +77,7 @@ export default function Navbar() {
 								alt="NISI Logo"
 								width={80}
 								height={40}
-								className="w-16 h-auto md:w-20" // mobile smaller, medium screens normal
+								className="w-16 h-auto md:w-20"
 							/>
 							<h1 className="text-xl md:text-3xl mt-2 md:mt-2 font-sans">
 								TECHNOLOGIES
@@ -67,21 +87,12 @@ export default function Navbar() {
 
 					{/* Desktop navigation - visible on md screens and up */}
 					<div className="hidden md:flex space-x-6 items-center">
-						<Link href="/plans" className="hover:text-purple-200">
-							Plans
-						</Link>
-						<Link href="/coverage" className="hover:text-purple-200">
-							Coverage
-						</Link>
-						<Link href="/about" className="hover:text-purple-200">
-							About Us
-						</Link>
-						<Link href="/support" className="hover:text-purple-200">
-							Support
-						</Link>
+						<NavLink href="/plans">Plans</NavLink>
+						<NavLink href="/coverage">Coverage</NavLink>
+						<NavLink href="/about">About Us</NavLink>
+						<NavLink href="/support">Support</NavLink>
 
 						<div className="h-6 w-px bg-white mx-2"></div>
-
 						<ClientLoginModal onAction={() => setIsMenuOpen(false)} />
 					</div>
 
@@ -137,47 +148,23 @@ export default function Navbar() {
 									},
 								}}
 							>
-								<motion.div variants={linkVariants}>
-									<Link
-										href="/plans"
-										className="block text-2xl py-4 hover:text-purple-200 border-b border-purple-700"
-										onClick={toggleMenu}
-									>
-										Plans
-									</Link>
-								</motion.div>
+								{[
+									{ href: '/plans', label: 'Plans' },
+									{ href: '/coverage', label: 'Coverage' },
+									{ href: '/about', label: 'About Us' },
+									{ href: '/support', label: 'Support' },
+								].map((link) => (
+									<motion.div key={link.href} variants={linkVariants}>
+										<Link
+											href={link.href}
+											className="block text-2xl py-4 hover:text-purple-200  border-purple-700"
+											onClick={toggleMenu}
+										>
+											{link.label}
+										</Link>
+									</motion.div>
+								))}
 
-								<motion.div variants={linkVariants}>
-									<Link
-										href="/coverage"
-										className="block text-2xl py-4 hover:text-purple-200 border-b border-purple-700"
-										onClick={toggleMenu}
-									>
-										Coverage
-									</Link>
-								</motion.div>
-
-								<motion.div variants={linkVariants}>
-									<Link
-										href="/about"
-										className="block text-2xl py-4 hover:text-purple-200 border-b border-purple-700"
-										onClick={toggleMenu}
-									>
-										About Us
-									</Link>
-								</motion.div>
-
-								<motion.div variants={linkVariants}>
-									<Link
-										href="/support"
-										className="block text-2xl py-4 hover:text-purple-200 border-purple-700"
-										onClick={toggleMenu}
-									>
-										Support
-									</Link>
-								</motion.div>
-
-								{/* Horizontal line separator */}
 								<motion.div variants={linkVariants}>
 									<hr className="border-purple-600 my-4" />
 								</motion.div>
