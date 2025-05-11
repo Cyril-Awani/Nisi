@@ -79,7 +79,7 @@ export default function Navbar() {
 
 						<div className="h-6 w-px bg-white mx-2"></div>
 
-						<ClientLoginModal />
+						<ClientLoginModal onLoginOpen={() => setIsMenuOpen(false)} />
 					</div>
 
 					{/* Mobile menu button */}
