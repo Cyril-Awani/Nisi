@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import ClientLoginModal from './ClientLoginModal';
 
 export default function Navbar() {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -78,12 +79,7 @@ export default function Navbar() {
 
 						<div className="h-6 w-px bg-white mx-2"></div>
 
-						<Link
-							href="/login"
-							className="bg-white text-purple-800 px-4 py-2 rounded hover:bg-purple-100"
-						>
-							Client Login
-						</Link>
+						<ClientLoginModal />
 					</div>
 
 					{/* Mobile menu button */}
@@ -184,13 +180,7 @@ export default function Navbar() {
 								</motion.div>
 
 								<motion.div variants={linkVariants}>
-									<Link
-										href="/login"
-										className="block bg-white text-purple-800 px-6 py-3 rounded-lg text-xl font-semibold text-center mt-4 hover:bg-purple-100"
-										onClick={toggleMenu}
-									>
-										Customer Login
-									</Link>
+									<ClientLoginModal />
 								</motion.div>
 							</motion.div>
 						</motion.div>
