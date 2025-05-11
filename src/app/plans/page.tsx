@@ -55,7 +55,7 @@ export default function PlansPage() {
 			speed: '20 Mbps',
 			devices: 'Up to 20 Devices',
 			price: '₦32,197',
-			discount: 0.07,
+			discount: 0.05,
 			features: ['Unlimited data', 'Free modem & router', 'VIP support'],
 			description: 'For power users and small businesses',
 		},
@@ -64,7 +64,7 @@ export default function PlansPage() {
 			speed: '50 Mbps',
 			devices: 'Up to 50 Devices',
 			price: '₦38,647',
-			discount: 0.1,
+			discount: 0.05,
 			features: ['Unlimited data', 'Free modem & router', 'VVIP support'],
 			description: 'Premium plan for heavy usage',
 		},
@@ -82,9 +82,9 @@ export default function PlansPage() {
 		annualPrice: string
 	): string => {
 		if (discount === 0) {
-			return `*Paid annually at ${annualPrice} / year `;
+			return `*Pay per annum at ${annualPrice} / year `;
 		}
-		return `*Paid annually at ${annualPrice} / year with ${Math.round(
+		return `*Pay per annum at ${annualPrice} / year with ${Math.round(
 			discount * 100
 		)}% discount for ${name.toLowerCase()}`;
 	};
@@ -264,7 +264,7 @@ export default function PlansPage() {
 									</p>
 									<div className="mb-6">
 										<span className="text-4xl font-bold">{plan.price}</span>
-										<span className="text-gray-500">/month</span>
+										<span className="text-gray-500 ">/month</span>
 										<p className="text-sm text-gray-500 mt-1">
 											{discountMessage}
 										</p>
