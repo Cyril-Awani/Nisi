@@ -219,12 +219,12 @@ export default function ClientLoginModal({
 
 						<div className="border-t p-4 bg-gray-50 rounded-b-lg text-center">
 							<p className="text-sm text-gray-600">
-								Don't have an account?{' '}
+								Don&apos;t have an account?{' '}
 								<button
 									onClick={() => handleLinkClick('/signup')}
 									className="text-blue-600 hover:text-blue-500 font-medium"
 								>
-									Let's get you set up...
+									Let&apos;s get you set up...
 								</button>
 							</p>
 						</div>
