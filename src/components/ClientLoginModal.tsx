@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
@@ -11,6 +11,29 @@ export default function ClientLoginModal() {
 	const [rememberMe, setRememberMe] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState('');
+	const modalRef = useRef<HTMLDivElement>(null);
+
+	// Close modal when clicking outside
+	useEffect(() => {
+		function handleClickOutside(event: MouseEvent) {
+			if (
+				modalRef.current &&
+				!modalRef.current.contains(event.target as Node)
+			) {
+				setIsOpen(false);
+			}
+		}
+
+		if (isOpen) {
+			document.addEventListener('mousedown', handleClickOutside);
+		} else {
+			document.removeEventListener('mousedown', handleClickOutside);
+		}
+
+		return () => {
+			document.removeEventListener('mousedown', handleClickOutside);
+		};
+	}, [isOpen]);
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
@@ -19,14 +42,10 @@ export default function ClientLoginModal() {
 
 		try {
 			// Add your authentication logic here
-			// Example: await authenticateUser(email, password);
 			console.log('Login attempt with:', { email, password, rememberMe });
-			// Simulate API call
 			await new Promise((resolve) => setTimeout(resolve, 1500));
-
 			// On successful login:
 			// setIsOpen(false);
-			// redirect or show success message
 		} catch {
 			setError('Invalid email or password. Please try again.');
 		} finally {
@@ -48,6 +67,7 @@ export default function ClientLoginModal() {
 			{isOpen && (
 				<div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4">
 					<motion.div
+						ref={modalRef}
 						initial={{ opacity: 0, scale: 0.9 }}
 						animate={{ opacity: 1, scale: 1 }}
 						exit={{ opacity: 0, scale: 0.9 }}
@@ -191,6 +211,7 @@ export default function ClientLoginModal() {
 								<Link
 									href="/signup"
 									className="text-blue-600 hover:text-blue-500 font-medium"
+									onClick={() => setIsOpen(false)}
 								>
 									Let&apos;s get you set up...
 								</Link>

@@ -32,7 +32,10 @@ export default function TopBar() {
 						Sancta Plaza, Opp Parallex Bank, Airport Junction. Warri.
 					</span>
 
-					<span className="flex items-center">
+					<a
+						href="mailto:support@nisitech.com"
+						className="flex items-center hover:text-purple-600 transition-colors duration-200"
+					>
 						<svg
 							className="w-4 h-4 mr-1"
 							fill="none"
@@ -46,11 +49,15 @@ export default function TopBar() {
 								d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
 							></path>
 						</svg>
-						<span className="hover:text-purple-600 transition-colors duration-200">
-							nisitechnologies.com
-						</span>
-					</span>
-					<span className="flex items-center">
+						support@nisitech.com
+					</a>
+
+					<a
+						href="https://wa.me/234708583761"
+						target="_blank"
+						rel="noopener noreferrer"
+						className="flex items-center hover:text-purple-600 transition-colors duration-200"
+					>
 						<svg
 							className="w-4 h-4 mr-1"
 							fill="none"
@@ -65,8 +72,14 @@ export default function TopBar() {
 							></path>
 						</svg>
 						+234 70 858 3761
-					</span>
-					<h2>FAQ</h2>
+					</a>
+
+					<a
+						href="/faq"
+						className="hover:text-purple-600 font-bold transition-colors duration-200"
+					>
+						FAQ
+					</a>
 				</div>
 			</div>
 		</div>

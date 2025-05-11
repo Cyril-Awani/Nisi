@@ -87,8 +87,9 @@ export default function AboutPage() {
 							</p>
 							<p className="text-gray-600 mb-6">
 								Today, we serve thousands of homes and businesses across
-								multiple states, continually investing in our network
-								infrastructure to deliver cutting-edge connectivity solutions.
+								multiple locations, continually investing in our network
+								infrastructure to deliver cutting-edge yet affordable
+								connectivity solutions.
 							</p>
 
 							<Link

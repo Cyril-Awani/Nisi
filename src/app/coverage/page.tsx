@@ -29,6 +29,7 @@ export default function CoveragePage() {
 		'Udu',
 		'Uvwie',
 		'Asaba',
+		'Ughelli',
 	];
 
 	const steps = [
@@ -139,10 +140,10 @@ export default function CoveragePage() {
 								))}
 							</div>
 							<Link
-								href="/plans"
+								href="/signup"
 								className="inline-block bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition"
 							>
-								Discover Now
+								Get Started
 							</Link>
 						</motion.div>
 					</div>
@@ -150,7 +151,7 @@ export default function CoveragePage() {
 			</section>
 
 			{/* Request Coverage Section */}
-			<section className="py-16 bg-gray-50">
+			<section id="request-coverage" className="py-16 bg-gray-50">
 				<div className="container mx-auto px-4">
 					<div className="max-w-4xl mx-auto">
 						<motion.div
@@ -279,6 +280,7 @@ export default function CoveragePage() {
 			</section>
 
 			{/* CTA Section */}
+			{/* CTA Section */}
 			<section className="py-16 bg-purple-800 text-white">
 				<div className="container mx-auto px-4 text-center">
 					<motion.div
@@ -293,18 +295,20 @@ export default function CoveragePage() {
 							location
 						</p>
 						<div className="flex flex-col sm:flex-row justify-center gap-4">
-							<Link
-								href="/coverage-checker"
+							<a
+								href="#request-coverage"
 								className="bg-white text-purple-800 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-purple-100 transition"
 							>
-								Check Coverage
-							</Link>
-							<Link
-								href="/contact"
+								Survey Request
+							</a>
+							<a
+								href="https://wa.me/2347078583761"
+								target="_blank"
+								rel="noopener noreferrer"
 								className="border-2 border-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-purple-700 transition"
 							>
 								Contact Sales
-							</Link>
+							</a>
 						</div>
 					</motion.div>
 				</div>

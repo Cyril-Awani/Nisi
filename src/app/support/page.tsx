@@ -15,12 +15,10 @@ export default function SupportPage() {
 	};
 
 	const features = [
-		'100 Mbps Download Speed',
+		'Reaching upto 100 Mbps Download Speed',
 		'Unlimited Data Usage',
-		'Free Wi-Fi Router',
 		'24/7 Technical Support',
-		'Simple Setup',
-		'Secure Connection',
+		'Timely Setup',
 	];
 
 	const whyChooseUs = [
@@ -68,8 +66,8 @@ export default function SupportPage() {
 						transition={{ delay: 0.2 }}
 						className="text-xl max-w-3xl mx-auto"
 					>
-						Netlink delivers fast, reliable internet with flexible packages and
-						24/7 support, ensuring seamless connectivity.
+						Nisi Technologies delivers fast, reliable internet with flexible
+						packages and 24/7 support, ensuring seamless connectivity.
 					</motion.p>
 				</div>
 			</section>
@@ -87,7 +85,7 @@ export default function SupportPage() {
 						>
 							<div className="relative h-96 w-full rounded-lg overflow-hidden shadow-xl">
 								<Image
-									src="/images/support/features.jpg"
+									src="/images/support/42317.jpg"
 									alt="High-Speed Internet Features"
 									fill
 									className="object-cover"
@@ -151,7 +149,7 @@ export default function SupportPage() {
 						viewport={{ once: true }}
 						className="text-center mb-12"
 					>
-						<h2 className="text-3xl font-bold mb-4">Our Products</h2>
+						<h2 className="text-4xl font-bold mb-4">Our Products</h2>
 						<p className="text-gray-600 max-w-3xl mx-auto">
 							High-Speed Internet Solutions for Every Need
 						</p>
@@ -167,7 +165,7 @@ export default function SupportPage() {
 						>
 							<div className="relative h-96 w-full rounded-lg overflow-hidden shadow-xl">
 								<Image
-									src="/images/support/products.jpg"
+									src="/images/support/42735.jpg"
 									alt="Netlink Products"
 									fill
 									className="object-cover"
@@ -182,7 +180,7 @@ export default function SupportPage() {
 							viewport={{ once: true }}
 							className="lg:w-1/2"
 						>
-							<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+							<div className="grid grid-cols-2 md:grid-cols-2 gap-6">
 								{products.map((product, index) => (
 									<motion.div
 										key={index}
@@ -216,7 +214,7 @@ export default function SupportPage() {
 					>
 						<h2 className="text-3xl font-bold mb-4">Why Choose Us</h2>
 						<p className="text-gray-600 max-w-3xl mx-auto">
-							Discover why Netlink is the best solution
+							Discover why Nisi Technologies is the best solution
 						</p>
 					</motion.div>
 
@@ -228,12 +226,13 @@ export default function SupportPage() {
 							viewport={{ once: true }}
 							className="lg:w-1/2"
 						>
-							<div className="relative h-96 w-full rounded-lg overflow-hidden shadow-xl">
+							<div className="relative h-64 md:h-96 w-full rounded-lg overflow-hidden shadow-xl">
 								<Image
-									src="/images/support/why-choose-us.jpg"
-									alt="Why Choose Netlink"
+									src="/images/support/6.jpg"
+									alt="Why Choose Nisi Technologies"
 									fill
 									className="object-cover"
+									sizes="(max-width: 768px) 100vw, 50vw"
 								/>
 							</div>
 						</motion.div>

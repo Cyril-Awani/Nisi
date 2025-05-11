@@ -58,11 +58,11 @@ export default function PlansGrid() {
 	};
 
 	return (
-		<div className="grid md:grid-cols-4 gap-8 my-8">
+		<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 my-8">
 			{plans.map((plan, index) => (
 				<div
 					key={index}
-					className={`border rounded-lg p-6 ${
+					className={`border rounded-lg p-6 md:p-4 ${
 						plan.popular ? 'border-purple-500 shadow-lg' : 'border-gray-200'
 					}`}
 				>
@@ -73,8 +73,12 @@ export default function PlansGrid() {
 					)}
 					<h3 className="text-2xl font-bold mb-1">{plan.name}</h3>
 					<p className="text-[14px] font-normal mb-4">{plan.devices}</p>
-					<p className="text-4xl font-bold mb-4">{plan.price}</p>
-					<p className="text-lg mb-6">{plan.speed} Download Speed</p>
+					<p className="text-4xl lg:text-2xl xl:text-4xl font-bold mb-2">
+						{plan.price}
+					</p>
+					<p className="italic text-lg lg:text-base xl:text-base mb-6">
+						{plan.speed} Download Speed
+					</p>
 					<ul className="space-y-2 mb-6">
 						{plan.features.map((feature, i) => (
 							<li key={i} className="flex items-center">

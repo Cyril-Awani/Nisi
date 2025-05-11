@@ -1,20 +1,32 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
+import TermsModal from '@/components/TermsModal';
 
 export default function InternetSignupProgress() {
+	const router = useRouter();
 	const [step, setStep] = useState(1);
+	const [showTerms, setShowTerms] = useState(false);
 	const [formData, setFormData] = useState({
 		name: '',
 		email: '',
 		phone: '',
 		address: '',
 		plan: '',
+		paymentMethod: '',
 		paymentProof: null as File | null,
 		agreedToTerms: false,
 		installationDate: '',
 		invoiceNumber: `INV-${Math.floor(100000 + Math.random() * 900000)}`,
+		addons: {
+			powerbank: { selected: false, quantity: 0, price: 40000 },
+			basicRouter: { selected: false, quantity: 0, price: 57000 },
+			highPowerRouter: { selected: false, quantity: 0, price: 40000 },
+			extraPole: { selected: false, quantity: 0, price: 10000 },
+			extraWire: { meters: 0, price: 500 },
+		},
 	});
 
 	const plans = [
@@ -50,6 +62,59 @@ export default function InternetSignupProgress() {
 			devices: 'Up to 50 Devices',
 			price: '₦50,000/mo',
 			features: ['Unlimited data', 'Free modem & router', 'VVIP support'],
+		},
+	];
+
+	const paymentMethods = [
+		{
+			id: 'bank-transfer',
+			name: 'Bank Transfer',
+			description: 'Direct transfer to our bank account',
+			icon: (
+				<svg
+					className="w-6 h-6"
+					fill="none"
+					stroke="currentColor"
+					viewBox="0 0 24 24"
+				>
+					<path
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						strokeWidth={2}
+						d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"
+					/>
+				</svg>
+			),
+		},
+		{
+			id: 'flutterwave',
+			name: 'Flutterwave',
+			description: 'Pay with card or mobile money',
+			icon: (
+				<svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+					<path d="M12 0a12 12 0 100 24 12 12 0 000-24zm0 22a10 10 0 110-20 10 10 0 010 20zm-3.5-8.5v-5h7v5h-7z" />
+				</svg>
+			),
+		},
+		{
+			id: 'pos',
+			name: 'POS Payment',
+			description: 'Pay at our office or agent location',
+			icon: (
+				<svg
+					className="w-6 h-6"
+					fill="none"
+					stroke="currentColor"
+					viewBox="0 0 24 24"
+				>
+					<path
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						strokeWidth={2}
+						d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
+					/>
+				</svg>
+			),
 		},
 	];
 
@@ -109,6 +174,47 @@ export default function InternetSignupProgress() {
 		alert(`Invoice ${formData.invoiceNumber} downloaded (simulated)`);
 	};
 
+	const updateAddonQuantity = (addon: string, value: number) => {
+		setFormData((prev) => {
+			const newAddons = { ...prev.addons };
+			if (addon === 'extraWire') {
+				newAddons.extraWire.meters = Math.max(0, value);
+			} else {
+				// @ts-ignore
+				newAddons[addon].quantity = Math.max(0, value);
+				// @ts-ignore
+				newAddons[addon].selected = value > 0;
+			}
+			return { ...prev, addons: newAddons };
+		});
+	};
+
+	const calculateTotal = () => {
+		const planPrice = plans.find((p) => p.id === formData.plan)?.price || '₦0';
+		const numericPlanPrice = parseInt(planPrice.replace(/[^\d]/g, '')) || 0;
+
+		const addonsTotal =
+			formData.addons.powerbank.quantity * formData.addons.powerbank.price +
+			formData.addons.basicRouter.quantity * formData.addons.basicRouter.price +
+			formData.addons.highPowerRouter.quantity *
+				formData.addons.highPowerRouter.price +
+			formData.addons.extraPole.quantity * formData.addons.extraPole.price +
+			formData.addons.extraWire.meters * formData.addons.extraWire.price;
+
+		const deviceSetupCost = 210000; // Fixed cost for devices and setup
+
+		const total = numericPlanPrice + addonsTotal + deviceSetupCost;
+		return total;
+	};
+
+	const formatCurrency = (amount: number) => {
+		return new Intl.NumberFormat('en-NG', {
+			style: 'currency',
+			currency: 'NGN',
+			minimumFractionDigits: 0,
+		}).format(amount);
+	};
+
 	return (
 		<div className="max-w-4xl mx-auto p-4 md:p-6 bg-white rounded-lg shadow-md">
 			{/* Progress Stepper */}
@@ -116,7 +222,7 @@ export default function InternetSignupProgress() {
 				<div className="flex justify-between relative">
 					<div className="absolute top-1/2 left-0 right-0 h-1 bg-gray-200 -z-10"></div>
 					<div
-						className="absolute top-1/2 left-0 h-1 bg-blue-600 -z-10 transition-all duration-300"
+						className="absolute top-1/2 left-0 h-1 bg-purple-600 -z-10 transition-all duration-300"
 						style={{
 							width:
 								step === 1
@@ -134,7 +240,7 @@ export default function InternetSignupProgress() {
 							<div
 								className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center border-2 ${
 									step >= stepNumber
-										? 'bg-blue-600 text-white border-blue-600'
+										? 'bg-purple-600 text-white border-purple-600'
 										: 'bg-white border-gray-300 text-gray-400'
 								}`}
 							>
@@ -142,7 +248,7 @@ export default function InternetSignupProgress() {
 							</div>
 							<span
 								className={`mt-2 text-xs md:text-sm font-medium ${
-									step >= stepNumber ? 'text-blue-600' : 'text-gray-500'
+									step >= stepNumber ? 'text-purple-600' : 'text-gray-500'
 								}`}
 							>
 								{stepNumber === 1
@@ -246,8 +352,8 @@ export default function InternetSignupProgress() {
 												}
 												className={`border rounded-lg p-4 cursor-pointer transition-all relative ${
 													formData.plan === plan.id
-														? 'border-blue-500 bg-blue-50 ring-2 ring-blue-200'
-														: 'border-gray-200 hover:border-blue-300'
+														? 'border-purple-500 bg-purple-50 ring-2 ring-purple-200'
+														: 'border-gray-200 hover:border-purple-300'
 												} ${plan.popular ? 'border-yellow-300' : ''}`}
 											>
 												{plan.popular && (
@@ -256,7 +362,7 @@ export default function InternetSignupProgress() {
 													</div>
 												)}
 												<h4 className="font-bold text-lg">{plan.name}</h4>
-												<p className="text-blue-600 font-semibold my-1">
+												<p className="text-purple-600 font-semibold my-1">
 													{plan.price}
 												</p>
 												<p className="text-sm text-gray-600">
@@ -303,17 +409,24 @@ export default function InternetSignupProgress() {
 										/>
 										<span className="text-sm">
 											I agree to the{' '}
-											<a href="#" className="text-blue-600">
+											<button
+												type="button"
+												className="text-purple-600 underline hover:text-purple-800 focus:outline-none"
+												onClick={(e) => {
+													e.preventDefault();
+													setShowTerms(true);
+												}}
+											>
 												Terms of Service
-											</a>{' '}
-											and authorize Nisi Technologies to contact me
+											</button>{' '}
+											and authorize Nisi Technologies to contact me.
 										</span>
 									</label>
 								</div>
 
 								<button
 									type="submit"
-									className="mt-6 w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 font-medium"
+									className="mt-6 w-full bg-purple-600 text-white py-3 rounded-md hover:bg-purple-700 font-medium"
 								>
 									Continue to Payment
 								</button>
@@ -331,6 +444,7 @@ export default function InternetSignupProgress() {
 						>
 							<h2 className="text-2xl font-bold mb-6">Payment Information</h2>
 
+							{/* Order Summary */}
 							<div className="bg-white border border-gray-200 rounded-lg p-6 mb-6">
 								<h3 className="font-bold text-lg mb-4">Order Summary</h3>
 								<div className="space-y-3">
@@ -347,54 +461,391 @@ export default function InternetSignupProgress() {
 											{plans.find((p) => p.id === formData.plan)?.price || '--'}
 										</span>
 									</div>
-									<div className="flex justify-between border-t pt-3">
-										<span className="text-gray-600">Installation Fee:</span>
-										<span className="font-medium">₦0 (FREE)</span>
+
+									{/* Device and Setup Cost */}
+									<div className="flex justify-between">
+										<span className="text-gray-600">Device & Setup Cost:</span>
+										<span className="font-medium">₦210,000</span>
 									</div>
+
+									{/* Addons Section */}
+									<div className="border-t pt-3">
+										<h4 className="text-gray-600 mb-2">Addons:</h4>
+										<div className="space-y-4">
+											{/* Power Bank */}
+											<div className="flex items-center justify-between">
+												<div className="flex items-center">
+													<input
+														type="checkbox"
+														id="powerbank"
+														className="mr-2"
+														checked={formData.addons.powerbank.selected}
+														onChange={(e) => {
+															updateAddonQuantity(
+																'powerbank',
+																e.target.checked ? 1 : 0
+															);
+														}}
+													/>
+													<label htmlFor="powerbank">
+														Power Bank (₦40,000 each)
+													</label>
+												</div>
+												{formData.addons.powerbank.selected && (
+													<div className="flex items-center">
+														<button
+															onClick={() =>
+																updateAddonQuantity(
+																	'powerbank',
+																	formData.addons.powerbank.quantity - 1
+																)
+															}
+															className="w-8 h-8 flex items-center justify-center border rounded-l-md bg-gray-100 hover:bg-gray-200"
+														>
+															-
+														</button>
+														<span className="w-10 h-8 flex items-center justify-center border-t border-b">
+															{formData.addons.powerbank.quantity}
+														</span>
+														<button
+															onClick={() =>
+																updateAddonQuantity(
+																	'powerbank',
+																	formData.addons.powerbank.quantity + 1
+																)
+															}
+															className="w-8 h-8 flex items-center justify-center border rounded-r-md bg-gray-100 hover:bg-gray-200"
+														>
+															+
+														</button>
+													</div>
+												)}
+											</div>
+
+											{/* Basic Router Extender */}
+											<div className="flex items-center justify-between">
+												<div className="flex items-center">
+													<input
+														type="checkbox"
+														id="basicRouter"
+														className="mr-2"
+														checked={formData.addons.basicRouter.selected}
+														onChange={(e) => {
+															updateAddonQuantity(
+																'basicRouter',
+																e.target.checked ? 1 : 0
+															);
+														}}
+													/>
+													<label htmlFor="basicRouter">
+														Basic Router Extender (₦57,000 each)
+													</label>
+												</div>
+												{formData.addons.basicRouter.selected && (
+													<div className="flex items-center">
+														<button
+															onClick={() =>
+																updateAddonQuantity(
+																	'basicRouter',
+																	formData.addons.basicRouter.quantity - 1
+																)
+															}
+															className="w-8 h-8 flex items-center justify-center border rounded-l-md bg-gray-100 hover:bg-gray-200"
+														>
+															-
+														</button>
+														<span className="w-10 h-8 flex items-center justify-center border-t border-b">
+															{formData.addons.basicRouter.quantity}
+														</span>
+														<button
+															onClick={() =>
+																updateAddonQuantity(
+																	'basicRouter',
+																	formData.addons.basicRouter.quantity + 1
+																)
+															}
+															className="w-8 h-8 flex items-center justify-center border rounded-r-md bg-gray-100 hover:bg-gray-200"
+														>
+															+
+														</button>
+													</div>
+												)}
+											</div>
+
+											{/* High Power Router */}
+											<div className="flex items-center justify-between">
+												<div className="flex items-center">
+													<input
+														type="checkbox"
+														id="highPowerRouter"
+														className="mr-2"
+														checked={formData.addons.highPowerRouter.selected}
+														onChange={(e) => {
+															updateAddonQuantity(
+																'highPowerRouter',
+																e.target.checked ? 1 : 0
+															);
+														}}
+													/>
+													<label htmlFor="highPowerRouter">
+														High Power Router (₦40,000 each)
+													</label>
+												</div>
+												{formData.addons.highPowerRouter.selected && (
+													<div className="flex items-center">
+														<button
+															onClick={() =>
+																updateAddonQuantity(
+																	'highPowerRouter',
+																	formData.addons.highPowerRouter.quantity - 1
+																)
+															}
+															className="w-8 h-8 flex items-center justify-center border rounded-l-md bg-gray-100 hover:bg-gray-200"
+														>
+															-
+														</button>
+														<span className="w-10 h-8 flex items-center justify-center border-t border-b">
+															{formData.addons.highPowerRouter.quantity}
+														</span>
+														<button
+															onClick={() =>
+																updateAddonQuantity(
+																	'highPowerRouter',
+																	formData.addons.highPowerRouter.quantity + 1
+																)
+															}
+															className="w-8 h-8 flex items-center justify-center border rounded-r-md bg-gray-100 hover:bg-gray-200"
+														>
+															+
+														</button>
+													</div>
+												)}
+											</div>
+
+											{/* Extra Pole */}
+											<div className="flex items-center justify-between">
+												<div className="flex items-center">
+													<input
+														type="checkbox"
+														id="extraPole"
+														className="mr-2"
+														checked={formData.addons.extraPole.selected}
+														onChange={(e) => {
+															updateAddonQuantity(
+																'extraPole',
+																e.target.checked ? 1 : 0
+															);
+														}}
+													/>
+													<label htmlFor="extraPole">
+														Extra Pole (₦10,000 each)
+													</label>
+												</div>
+												{formData.addons.extraPole.selected && (
+													<div className="flex items-center">
+														<button
+															onClick={() =>
+																updateAddonQuantity(
+																	'extraPole',
+																	formData.addons.extraPole.quantity - 1
+																)
+															}
+															className="w-8 h-8 flex items-center justify-center border rounded-l-md bg-gray-100 hover:bg-gray-200"
+														>
+															-
+														</button>
+														<span className="w-10 h-8 flex items-center justify-center border-t border-b">
+															{formData.addons.extraPole.quantity}
+														</span>
+														<button
+															onClick={() =>
+																updateAddonQuantity(
+																	'extraPole',
+																	formData.addons.extraPole.quantity + 1
+																)
+															}
+															className="w-8 h-8 flex items-center justify-center border rounded-r-md bg-gray-100 hover:bg-gray-200"
+														>
+															+
+														</button>
+													</div>
+												)}
+											</div>
+
+											{/* Extra Wire */}
+											<div className="flex items-center justify-between">
+												<div className="flex items-center">
+													<input
+														type="checkbox"
+														id="extraWire"
+														className="mr-2"
+														checked={formData.addons.extraWire.meters > 0}
+														onChange={(e) => {
+															updateAddonQuantity(
+																'extraWire',
+																e.target.checked ? 1 : 0
+															);
+														}}
+													/>
+													<label htmlFor="extraWire">
+														Extra Wire (₦500/meter)
+													</label>
+												</div>
+												{formData.addons.extraWire.meters > 0 && (
+													<div className="flex items-center">
+														<button
+															onClick={() =>
+																updateAddonQuantity(
+																	'extraWire',
+																	formData.addons.extraWire.meters - 1
+																)
+															}
+															className="w-8 h-8 flex items-center justify-center border rounded-l-md bg-gray-100 hover:bg-gray-200"
+														>
+															-
+														</button>
+														<input
+															type="number"
+															min="0"
+															value={formData.addons.extraWire.meters}
+															onChange={(e) =>
+																updateAddonQuantity(
+																	'extraWire',
+																	parseInt(e.target.value) || 0
+																)
+															}
+															className="w-16 h-8 text-center border-t border-b"
+														/>
+														<button
+															onClick={() =>
+																updateAddonQuantity(
+																	'extraWire',
+																	formData.addons.extraWire.meters + 1
+																)
+															}
+															className="w-8 h-8 flex items-center justify-center border rounded-r-md bg-gray-100 hover:bg-gray-200"
+														>
+															+
+														</button>
+													</div>
+												)}
+											</div>
+										</div>
+									</div>
+
 									<div className="flex justify-between font-bold text-lg pt-3 border-t">
 										<span>Total Due Now:</span>
-										<span>
-											{plans.find((p) => p.id === formData.plan)?.price || '--'}
-										</span>
+										<span>{formatCurrency(calculateTotal())}</span>
 									</div>
 								</div>
 							</div>
 
-							<div className="bg-blue-50 p-6 rounded-lg mb-6">
-								<h3 className="font-bold text-lg mb-3">Payment Instructions</h3>
-								<ol className="list-decimal list-inside space-y-2 text-sm">
-									<li>Make payment to our bank account</li>
-									<li>Bank: Zenith Bank</li>
-									<li>Account Name: Nisi Technologies Ltd</li>
-									<li>Account Number: 1234567890</li>
-									<li>
-										Amount:{' '}
-										{plans.find((p) => p.id === formData.plan)?.price || '--'}
-									</li>
-									<li>Use your name as payment reference</li>
-								</ol>
-								<button
-									onClick={downloadInvoice}
-									className="mt-4 flex items-center text-blue-600 hover:text-blue-800 text-sm font-medium"
-								>
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										className="h-5 w-5 mr-1"
-										fill="none"
-										viewBox="0 0 24 24"
-										stroke="currentColor"
-									>
-										<path
-											strokeLinecap="round"
-											strokeLinejoin="round"
-											strokeWidth={2}
-											d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-										/>
-									</svg>
-									Download Payment Invoice
-								</button>
+							{/* Payment Method Selection */}
+							<div className="mb-6">
+								<h3 className="font-medium mb-3">Select Payment Method*</h3>
+								<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+									{paymentMethods.map((method) => (
+										<div
+											key={method.id}
+											onClick={() =>
+												setFormData({ ...formData, paymentMethod: method.id })
+											}
+											className={`border rounded-lg p-4 cursor-pointer transition-all ${
+												formData.paymentMethod === method.id
+													? 'border-purple-500 bg-purple-50 ring-2 ring-purple-200'
+													: 'border-gray-200 hover:border-purple-300'
+											}`}
+										>
+											<div className="flex items-center mb-2">
+												<div className="text-purple-600 mr-2">
+													{method.icon}
+												</div>
+												<h4 className="font-bold">{method.name}</h4>
+											</div>
+											<p className="text-sm text-gray-600">
+												{method.description}
+											</p>
+										</div>
+									))}
+								</div>
 							</div>
 
+							{/* Payment Instructions */}
+							{formData.paymentMethod === 'bank-transfer' && (
+								<div className="bg-purple-50 p-6 rounded-lg mb-6">
+									<h3 className="font-bold text-lg mb-3">
+										Bank Transfer Instructions
+									</h3>
+									<ol className="list-decimal list-inside space-y-2 text-sm">
+										<li>Bank: Zenith Bank</li>
+										<li>Account Name: Nisi Technologies Ltd</li>
+										<li>Account Number: 1234567890</li>
+										<li>Amount: {formatCurrency(calculateTotal())}</li>
+										<li>Use your name as payment reference</li>
+									</ol>
+									<button
+										onClick={downloadInvoice}
+										className="mt-4 flex items-center text-purple-600 hover:text-purple-800 text-sm font-medium"
+									>
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											className="h-5 w-5 mr-1"
+											fill="none"
+											viewBox="0 0 24 24"
+											stroke="currentColor"
+										>
+											<path
+												strokeLinecap="round"
+												strokeLinejoin="round"
+												strokeWidth={2}
+												d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+											/>
+										</svg>
+										Download Payment Invoice
+									</button>
+								</div>
+							)}
+
+							{formData.paymentMethod === 'flutterwave' && (
+								<div className="bg-purple-50 p-6 rounded-lg mb-6">
+									<h3 className="font-bold text-lg mb-3">
+										Flutterwave Payment
+									</h3>
+									<p className="text-sm mb-4">
+										You'll be redirected to Flutterwave's secure payment page to
+										complete your transaction.
+									</p>
+									<button
+										className="w-full bg-purple-600 text-white py-3 rounded-md hover:bg-purple-700 font-medium"
+										onClick={() => {
+											alert('Redirecting to Flutterwave payment gateway...');
+										}}
+									>
+										Pay with Flutterwave
+									</button>
+								</div>
+							)}
+
+							{formData.paymentMethod === 'pos' && (
+								<div className="bg-purple-50 p-6 rounded-lg mb-6">
+									<h3 className="font-bold text-lg mb-3">
+										POS Payment Instructions
+									</h3>
+									<p className="text-sm mb-2">
+										Visit any of our offices or agent locations to make payment:
+									</p>
+									<ul className="list-disc list-inside text-sm space-y-1">
+										<li>Main Office: 123 Tech Street, Warri</li>
+										<li>Branch Office: 456 Digital Road, Asaba</li>
+									</ul>
+									<p className="text-sm mt-4">
+										Bring your invoice number:{' '}
+										<span className="font-bold">{formData.invoiceNumber}</span>
+									</p>
+								</div>
+							)}
+
+							{/* Warning Message */}
 							<div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6">
 								<div className="flex">
 									<div className="flex-shrink-0">
@@ -420,11 +871,17 @@ export default function InternetSignupProgress() {
 								</div>
 							</div>
 
+							{/* Continue Button */}
 							<button
 								onClick={handlePaymentContinue}
-								className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 font-medium"
+								disabled={!formData.paymentMethod}
+								className={`w-full bg-purple-600 text-white py-3 rounded-md hover:bg-purple-700 font-medium ${
+									!formData.paymentMethod ? 'opacity-50 cursor-not-allowed' : ''
+								}`}
 							>
-								I`ve Made Payment - Continue
+								{formData.paymentMethod === 'flutterwave'
+									? "I've Completed Payment - Continue"
+									: 'Continue to Receipt Upload'}
 							</button>
 						</motion.div>
 					)}
@@ -470,7 +927,7 @@ export default function InternetSignupProgress() {
 												onClick={() =>
 													setFormData({ ...formData, paymentProof: null })
 												}
-												className="mt-2 text-sm text-blue-600 hover:text-blue-800"
+												className="mt-2 text-sm text-purple-600 hover:text-purple-800"
 											>
 												Change File
 											</button>
@@ -492,7 +949,7 @@ export default function InternetSignupProgress() {
 												/>
 											</svg>
 											<div className="mt-4 flex text-sm text-gray-600">
-												<label className="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none">
+												<label className="relative cursor-pointer bg-white rounded-md font-medium text-purple-600 hover:text-purple-500 focus-within:outline-none">
 													<span>Upload a file</span>
 													<input
 														type="file"
@@ -511,12 +968,12 @@ export default function InternetSignupProgress() {
 									)}
 								</div>
 
-								<div className="bg-blue-50 p-4 rounded-lg">
+								<div className="bg-purple-50 p-4 rounded-lg">
 									<h3 className="font-medium mb-2">What happens next?</h3>
 									<ul className="text-sm space-y-1">
 										<li className="flex items-start">
 											<svg
-												className="h-4 w-4 text-blue-600 mt-0.5 mr-2 flex-shrink-0"
+												className="h-4 w-4 text-purple-600 mt-0.5 mr-2 flex-shrink-0"
 												fill="none"
 												viewBox="0 0 24 24"
 												stroke="currentColor"
@@ -532,7 +989,7 @@ export default function InternetSignupProgress() {
 										</li>
 										<li className="flex items-start">
 											<svg
-												className="h-4 w-4 text-blue-600 mt-0.5 mr-2 flex-shrink-0"
+												className="h-4 w-4 text-purple-600 mt-0.5 mr-2 flex-shrink-0"
 												fill="none"
 												viewBox="0 0 24 24"
 												stroke="currentColor"
@@ -550,7 +1007,7 @@ export default function InternetSignupProgress() {
 										</li>
 										<li className="flex items-start">
 											<svg
-												className="h-4 w-4 text-blue-600 mt-0.5 mr-2 flex-shrink-0"
+												className="h-4 w-4 text-purple-600 mt-0.5 mr-2 flex-shrink-0"
 												fill="none"
 												viewBox="0 0 24 24"
 												stroke="currentColor"
@@ -572,7 +1029,7 @@ export default function InternetSignupProgress() {
 								<button
 									type="submit"
 									disabled={!formData.paymentProof}
-									className={`w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 font-medium ${
+									className={`w-full bg-purple-600 text-white py-3 rounded-md hover:bg-purple-700 font-medium ${
 										!formData.paymentProof
 											? 'opacity-50 cursor-not-allowed'
 											: ''
@@ -593,10 +1050,10 @@ export default function InternetSignupProgress() {
 							className="text-center"
 						>
 							<div className="bg-purple-100 p-8 rounded-lg">
-								<div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+								<div className="w-20 h-20 bg-purple-900 rounded-full flex items-center justify-center mx-auto mb-4">
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
-										className="h-10 w-10 text-green-600"
+										className="h-10 w-10 text-white"
 										fill="none"
 										viewBox="0 0 24 24"
 										stroke="currentColor"
@@ -662,7 +1119,7 @@ export default function InternetSignupProgress() {
 									<div className="mt-6 flex justify-between">
 										<button
 											onClick={downloadInvoice}
-											className="text-blue-600 hover:text-blue-800 font-medium flex items-center"
+											className="text-purple-600 hover:text-purple-800 font-medium flex items-center"
 										>
 											<svg
 												xmlns="http://www.w3.org/2000/svg"
@@ -703,12 +1160,12 @@ export default function InternetSignupProgress() {
 									</div>
 								</div>
 
-								<div className="mt-8 bg-blue-50 p-4 rounded-lg">
+								<div className="mt-8 bg-purple-50 p-4 rounded-lg">
 									<h3 className="font-medium mb-2">What to expect next:</h3>
 									<ul className="text-sm space-y-1 text-left max-w-md mx-auto">
 										<li className="flex items-start">
 											<svg
-												className="h-4 w-4 text-blue-600 mt-0.5 mr-2 flex-shrink-0"
+												className="h-4 w-4 text-purple-600 mt-0.5 mr-2 flex-shrink-0"
 												fill="none"
 												viewBox="0 0 24 24"
 												stroke="currentColor"
@@ -727,7 +1184,7 @@ export default function InternetSignupProgress() {
 										</li>
 										<li className="flex items-start">
 											<svg
-												className="h-4 w-4 text-blue-600 mt-0.5 mr-2 flex-shrink-0"
+												className="h-4 w-4 text-purple-600 mt-0.5 mr-2 flex-shrink-0"
 												fill="none"
 												viewBox="0 0 24 24"
 												stroke="currentColor"
@@ -746,7 +1203,7 @@ export default function InternetSignupProgress() {
 										</li>
 										<li className="flex items-start">
 											<svg
-												className="h-4 w-4 text-blue-600 mt-0.5 mr-2 flex-shrink-0"
+												className="h-4 w-4 text-purple-600 mt-0.5 mr-2 flex-shrink-0"
 												fill="none"
 												viewBox="0 0 24 24"
 												stroke="currentColor"
@@ -766,11 +1223,8 @@ export default function InternetSignupProgress() {
 								</div>
 
 								<button
-									className="mt-6 bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 font-medium"
-									onClick={() => {
-										// In a real app, this would navigate to dashboard
-										console.log('Going to dashboard...');
-									}}
+									className="mt-6 bg-purple-600 text-white px-6 py-2 rounded-md hover:bg-purple-700 font-medium"
+									onClick={() => router.push('/')}
 								>
 									Back to Homepage
 								</button>
@@ -779,6 +1233,14 @@ export default function InternetSignupProgress() {
 					)}
 				</AnimatePresence>
 			</div>
+
+			<TermsModal
+				isOpen={showTerms}
+				onClose={() => {
+					setShowTerms(false);
+					setFormData({ ...formData, agreedToTerms: true });
+				}}
+			/>
 		</div>
 	);
 }
