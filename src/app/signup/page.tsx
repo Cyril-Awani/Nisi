@@ -424,7 +424,7 @@ export default function InternetSignupProgress() {
 								onClick={handlePaymentContinue}
 								className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 font-medium"
 							>
-								I've Made Payment - Continue
+								I`ve Made Payment - Continue
 							</button>
 						</motion.div>
 					)}
@@ -528,7 +528,7 @@ export default function InternetSignupProgress() {
 													d="M5 13l4 4L19 7"
 												/>
 											</svg>
-											<span>We'll verify your payment within 24 hours</span>
+											<span>We`ll verify your payment within 24 hours</span>
 										</li>
 										<li className="flex items-start">
 											<svg
@@ -563,7 +563,7 @@ export default function InternetSignupProgress() {
 												/>
 											</svg>
 											<span>
-												You'll receive a confirmation with installation date
+												You`ll receive a confirmation with installation date
 											</span>
 										</li>
 									</ul>

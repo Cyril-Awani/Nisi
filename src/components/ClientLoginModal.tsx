@@ -27,7 +27,7 @@ export default function ClientLoginModal() {
 			// On successful login:
 			// setIsOpen(false);
 			// redirect or show success message
-		} catch (err) {
+		} catch {
 			setError('Invalid email or password. Please try again.');
 		} finally {
 			setIsLoading(false);
@@ -192,7 +192,7 @@ export default function ClientLoginModal() {
 									href="/signup"
 									className="text-blue-600 hover:text-blue-500 font-medium"
 								>
-									Let`s get you set up...
+									Let's get you set up...
 								</Link>
 							</p>
 						</div>
