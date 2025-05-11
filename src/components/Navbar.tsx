@@ -157,7 +157,7 @@ export default function Navbar() {
 									<motion.div key={link.href} variants={linkVariants}>
 										<Link
 											href={link.href}
-											className="block text-2xl py-4 hover:text-purple-200  border-purple-700"
+											className="block text-2xl py-4 hover:text-purple-200 border-purple-700"
 											onClick={toggleMenu}
 										>
 											{link.label}
