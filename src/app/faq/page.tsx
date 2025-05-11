@@ -145,9 +145,9 @@ export default function FAQPage() {
 				},
 				{
 					id: 'install-2',
-					question: 'What Package Comes With a New Installation?',
+					question: 'What Comes With a New Installation?',
 					answer:
-						'All installations include a router and necessary cables. Higher packages may include additional equipment.',
+						'All installations basically include a router, an outoor Radio, a Pole and 40m CAT5/Cat6 cables. Higher packages may include additional equipment.',
 				},
 				{
 					id: 'install-3',
