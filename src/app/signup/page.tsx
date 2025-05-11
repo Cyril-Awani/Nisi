@@ -29,10 +29,14 @@ export default function InternetSignupProgress() {
 		},
 	});
 
+	const [formErrors, setFormErrors] = useState({
+		plan: false,
+	});
+
 	const plans = [
 		{
 			id: 'bronze',
-			name: 'Bronze',
+			name: 'Nisi Bronze',
 			speed: '5 Mbps',
 			devices: 'Up to 5 Devices',
 			price: '₦13,922/mo',
@@ -40,7 +44,7 @@ export default function InternetSignupProgress() {
 		},
 		{
 			id: 'silver',
-			name: 'Silver',
+			name: 'Nisi Silver',
 			speed: '10 Mbps',
 			devices: 'Up to 10 Devices',
 			price: '₦18,222/mo',
@@ -48,19 +52,19 @@ export default function InternetSignupProgress() {
 			popular: true,
 		},
 		{
-			id: 'gold',
+			id: 'Nisi Gold',
 			name: 'Gold',
 			speed: '20 Mbps',
 			devices: 'Up to 20 Devices',
-			price: '₦38,499/mo',
+			price: '₦32,197/mo',
 			features: ['Unlimited data', 'Free modem & router', 'VIP support'],
 		},
 		{
-			id: 'platinum',
+			id: 'Nisi Platinum',
 			name: 'Platinum',
 			speed: '50 Mbps',
 			devices: 'Up to 50 Devices',
-			price: '₦50,000/mo',
+			price: '₦38,647/mo',
 			features: ['Unlimited data', 'Free modem & router', 'VVIP support'],
 		},
 	];
@@ -120,6 +124,11 @@ export default function InternetSignupProgress() {
 
 	const handleSignupSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
+		const errors = {
+			plan: !formData.plan,
+		};
+		setFormErrors(errors);
+
 		if (
 			formData.name &&
 			formData.email &&
@@ -141,21 +150,29 @@ export default function InternetSignupProgress() {
 		e.preventDefault();
 		if (formData.paymentProof) {
 			setStep(4);
+
 			// Simulate processing time
 			setTimeout(() => {
-				const installationDate = new Date();
-				installationDate.setDate(
-					installationDate.getDate() + 3 + Math.floor(Math.random() * 3)
-				);
+				const today = new Date();
+				const workingDaysToAdd = 5;
+				let addedDays = 0;
+				let potentialDate = new Date(today);
+
+				while (addedDays < workingDaysToAdd) {
+					potentialDate.setDate(potentialDate.getDate() + 1);
+					const day = potentialDate.getDay();
+					if (day !== 0 && day !== 6) {
+						addedDays++;
+					}
+				}
+
 				setFormData((prev) => ({
 					...prev,
-					installationDate: installationDate.toLocaleDateString('en-US', {
+					installationDate: potentialDate.toLocaleDateString('en-US', {
 						weekday: 'long',
 						year: 'numeric',
 						month: 'long',
 						day: 'numeric',
-						hour: '2-digit',
-						minute: '2-digit',
 					}),
 				}));
 			}, 1500);
@@ -342,7 +359,14 @@ export default function InternetSignupProgress() {
 								</div>
 
 								<div className="mt-6">
-									<h3 className="font-medium mb-3">Select Your Plan*</h3>
+									<div className="flex justify-between items-center mb-3">
+										<h3 className="font-medium">Select Your Plan*</h3>
+										{formErrors.plan && (
+											<span className="text-red-500 text-sm">
+												Please select a plan
+											</span>
+										)}
+									</div>
 									<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
 										{plans.map((plan) => (
 											<div
@@ -488,7 +512,7 @@ export default function InternetSignupProgress() {
 														}}
 													/>
 													<label htmlFor="powerbank">
-														Power Bank (₦40,000 each)
+														Power Bank (₦40,000)
 													</label>
 												</div>
 												{formData.addons.powerbank.selected && (
@@ -538,7 +562,7 @@ export default function InternetSignupProgress() {
 														}}
 													/>
 													<label htmlFor="basicRouter">
-														Basic Router Extender (₦57,000 each)
+														Basic Router Extender (₦45,000)
 													</label>
 												</div>
 												{formData.addons.basicRouter.selected && (
@@ -588,7 +612,7 @@ export default function InternetSignupProgress() {
 														}}
 													/>
 													<label htmlFor="highPowerRouter">
-														High Power Router (₦40,000 each)
+														Wifi-6/7 Router (₦80,000)
 													</label>
 												</div>
 												{formData.addons.highPowerRouter.selected && (
@@ -638,7 +662,7 @@ export default function InternetSignupProgress() {
 														}}
 													/>
 													<label htmlFor="extraPole">
-														Extra Pole (₦10,000 each)
+														Extra Pole (₦10,000)
 													</label>
 												</div>
 												{formData.addons.extraPole.selected && (
@@ -688,7 +712,7 @@ export default function InternetSignupProgress() {
 														}}
 													/>
 													<label htmlFor="extraWire">
-														Extra Wire (₦500/meter)
+														Extra Wire (₦500/ m)
 													</label>
 												</div>
 												{formData.addons.extraWire.meters > 0 && (
@@ -1109,9 +1133,8 @@ export default function InternetSignupProgress() {
 										</div>
 										<div className="flex justify-between">
 											<span className="text-gray-600">Installation Date:</span>
-											<span className="font-medium">
-												{formData.installationDate ||
-													'Will be scheduled within 2-5 working days'}
+											<span className="font-medium text-md">
+												Before {formData.installationDate}
 											</span>
 										</div>
 									</div>

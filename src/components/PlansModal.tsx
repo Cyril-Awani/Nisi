@@ -20,17 +20,26 @@ interface YearlyPlansModalProps {
 }
 
 const plans: Plan[] = [
-	{ name: 'Bronze', price: 13922, hasDiscount: false },
-	{ name: 'Silver', price: 18222, hasDiscount: true },
-	{ name: 'Gold', price: 32197, hasDiscount: true },
-	{ name: 'Platinum', price: 38647, hasDiscount: true },
+	{ name: 'Nisi Bronze', price: 13922, hasDiscount: false },
+	{ name: 'Nisi Silver', price: 18222, hasDiscount: true },
+	{ name: 'Nisi Gold', price: 32197, hasDiscount: true },
+	{ name: 'Nisi Platinum', price: 38647, hasDiscount: true },
+	{ name: 'Nisi Business', price: 50000, hasDiscount: true },
 ];
 
 const durations: Duration[] = [
 	{ months: 1, label: '1 Month', discount: 0 },
+	{ months: 2, label: '2 Month', discount: 0 },
 	{ months: 3, label: '3 Months (3% off)', discount: 3 },
-	{ months: 6, label: '6 Months (7% off)', discount: 7 },
-	{ months: 12, label: '12 Months (10% off)', discount: 10 },
+	{ months: 4, label: '4 Months (3% off)', discount: 3 },
+	{ months: 5, label: '5 Months (3% off)', discount: 3 },
+	{ months: 6, label: '6 Months (4% off)', discount: 5 },
+	{ months: 7, label: '7 Months (4% off)', discount: 5 },
+	{ months: 8, label: '8 Months (4% off)', discount: 5 },
+	{ months: 9, label: '9 Months (4% off)', discount: 5 },
+	{ months: 10, label: '10 Months (5% off)', discount: 5 },
+	{ months: 11, label: '11 Months (5% off)', discount: 5 },
+	{ months: 12, label: '12 Months (5% off)', discount: 5 },
 ];
 
 export default function YearlyPlansModal({
@@ -140,11 +149,18 @@ export default function YearlyPlansModal({
 								setSelectedDuration(duration || durations[0]);
 							}}
 						>
-							{durations.map((duration) => (
-								<option key={duration.months} value={duration.months}>
-									{duration.label}
-								</option>
-							))}
+							{durations.map((duration) => {
+								const showLabel =
+									selectedPlan.hasDiscount && duration.discount > 0
+										? ` (${duration.discount}% off)`
+										: '';
+								return (
+									<option key={duration.months} value={duration.months}>
+										{duration.months} Month{duration.months > 1 ? 's' : ''}
+										{showLabel}
+									</option>
+								);
+							})}
 						</select>
 					</div>
 

@@ -30,14 +30,14 @@ export default function PlansGrid() {
 			name: 'Gold',
 			speed: '20 Mbps',
 			devices: 'Up to 20 Devices',
-			price: '₦38,499/mo',
+			price: '₦32,197/mo',
 			features: ['Unlimited data', 'Free modem & router', 'VIP support'],
 		},
 		{
 			name: 'Platinum',
 			speed: '50 Mbps',
 			devices: 'Up to 50 Devices',
-			price: '₦50,000/mo',
+			price: '₦38,647/mo',
 			features: ['Unlimited data', 'Free modem & router', 'VVIP support'],
 		},
 	];
