@@ -187,12 +187,12 @@ export default function ClientLoginModal() {
 						{/* Modal Footer */}
 						<div className="border-t p-4 bg-gray-50 rounded-b-lg text-center">
 							<p className="text-sm text-gray-600">
-								Don't have an account?{' '}
+								Don`t have an account?{' '}
 								<Link
 									href="/signup"
 									className="text-blue-600 hover:text-blue-500 font-medium"
 								>
-									Let's get you set up...
+									Let`s get you set up...
 								</Link>
 							</p>
 						</div>
