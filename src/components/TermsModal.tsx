@@ -12,7 +12,6 @@ export default function TermsModal({
 }) {
 	const modalRef = useRef<HTMLDivElement>(null);
 
-	// Close modal when clicking outside or pressing Escape
 	useEffect(() => {
 		function handleClickOutside(event: MouseEvent) {
 			if (

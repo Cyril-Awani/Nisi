@@ -41,7 +41,6 @@ export default function HelpSection() {
 				</h2>
 
 				<div className="flex flex-col lg:flex-row gap-8">
-					{/* FAQ Accordion - Left Side */}
 					<div className="lg:w-1/2">
 						<div className="space-y-4">
 							{faqItems.map((item, index) => (
@@ -90,7 +89,6 @@ export default function HelpSection() {
 						</div>
 					</div>
 
-					{/* Help Section - Right Side */}
 					<div className="lg:w-1/2 bg-purple-800 text-white p-8 rounded-lg">
 						<div className="max-w-md mx-auto lg:mx-0">
 							<h3 className="text-2xl font-bold mb-4">Still Need Our Help?</h3>

@@ -91,11 +91,9 @@ export default function FeaturesGrid() {
 	return (
 		<section className="bg-white hidden md:block">
 			{' '}
-			{/* hide below sm */}
 			<div className="container mx-auto px-4">
 				<div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
 					{' '}
-					{/* 1 row on desktop */}
 					{features.map((feature, index) => (
 						<div
 							key={index}

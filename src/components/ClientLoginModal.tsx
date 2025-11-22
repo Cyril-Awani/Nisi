@@ -5,8 +5,8 @@ import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 
 interface ClientLoginModalProps {
-	onAction?: () => void; // Callback for when any action is taken (login, forgot password, signup)
-	onLoginOpen?: () => void; // Callback for when login modal is opened
+	onAction?: () => void;
+	onLoginOpen?: () => void;
 }
 
 export default function ClientLoginModal({
@@ -49,10 +49,9 @@ export default function ClientLoginModal({
 		setError('');
 
 		try {
-			console.log('Login attempt with:', { email, password, rememberMe });
 			await new Promise((resolve) => setTimeout(resolve, 1500));
 			setIsOpen(false);
-			onAction?.(); // Close mobile menu after successful login
+			onAction?.();
 		} catch {
 			setError('Invalid email or password. Please try again.');
 		} finally {
@@ -61,9 +60,9 @@ export default function ClientLoginModal({
 	};
 
 	const handleLinkClick = (path: string) => {
-		setIsOpen(false); // Close the modal
-		onAction?.(); // Close mobile menu
-		router.push(path); // Navigate to the specified path
+		setIsOpen(false);
+		onAction?.();
+		router.push(path);
 	};
 
 	return (
@@ -71,7 +70,7 @@ export default function ClientLoginModal({
 			<button
 				onClick={() => {
 					setIsOpen(true);
-					onLoginOpen?.(); // Close mobile menu when opening login modal
+					onLoginOpen?.();
 				}}
 				className="bg-white text-purple-800 px-4 py-2 rounded hover:bg-purple-100 transition"
 			>

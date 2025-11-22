@@ -12,7 +12,6 @@ import {
 export default function Hero() {
 	return (
 		<section className="relative w-full h-[70vh] flex items-center overflow-hidden">
-			{/* Background Image */}
 			<div className="absolute inset-0 -z-10">
 				<Image
 					src="/images/hero.jpg"
@@ -23,10 +22,8 @@ export default function Hero() {
 				/>
 			</div>
 
-			{/* Gradient */}
 			<div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent"></div>
 
-			{/* Social Media Icons */}
 			<div className="absolute left-4 top-1/2 transform -translate-y-1/2 hidden md:flex flex-col space-y-4 z-20">
 				<a
 					href="https://facebook.com"
@@ -73,7 +70,6 @@ export default function Hero() {
 				</a>
 			</div>
 
-			{/* Content */}
 			<div className="container mx-auto px-10 md:px-20 max-w-6xl z-10 pl-8 md:pl-20 lg:pl-6">
 				<h1 className="text-purple-900 text-4xl md:text-6xl font-bold leading-tight">
 					Lightning Fast Internet <br /> for Your Home

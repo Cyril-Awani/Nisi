@@ -211,7 +211,6 @@ export default function FAQPage() {
 			</div>
 
 			<div className="flex flex-col md:flex-row gap-8">
-				{/* Category Navigation */}
 				<div className="md:w-1/4">
 					<div className="sticky top-4 space-y-2">
 						{Object.entries(categories).map(([key, category]) => (
@@ -230,7 +229,6 @@ export default function FAQPage() {
 					</div>
 				</div>
 
-				{/* Questions List */}
 				<div className="md:w-3/4">
 					<motion.div
 						key={activeCategory}
@@ -291,7 +289,6 @@ export default function FAQPage() {
 				</div>
 			</div>
 
-			{/* Contact CTA */}
 			<div className="mt-16 bg-purple-50 rounded-xl p-8 text-center">
 				<h3 className="text-xl font-bold text-gray-900 mb-2">
 					Still have questions?

@@ -48,7 +48,6 @@ export default function SupportPage() {
 
 	return (
 		<div className="bg-white">
-			{/* Hero Section */}
 			<section className="relative bg-purple-900 text-white py-20">
 				<div className="container mx-auto px-4 text-center">
 					<motion.h1
@@ -72,7 +71,6 @@ export default function SupportPage() {
 				</div>
 			</section>
 
-			{/* Features Section - Image Left */}
 			<section className="py-16">
 				<div className="container mx-auto px-4">
 					<div className="flex flex-col lg:flex-row items-center gap-12">
@@ -139,7 +137,6 @@ export default function SupportPage() {
 				</div>
 			</section>
 
-			{/* Products Section - Image Right */}
 			<section className="py-16 bg-gray-50">
 				<div className="container mx-auto px-4">
 					<motion.div
@@ -202,7 +199,6 @@ export default function SupportPage() {
 				</div>
 			</section>
 
-			{/* Why Choose Us Section - Image Left */}
 			<section className="py-16">
 				<div className="container mx-auto px-4">
 					<motion.div
@@ -264,7 +260,6 @@ export default function SupportPage() {
 				</div>
 			</section>
 
-			{/* Support CTA Section */}
 			<section className="py-16 bg-purple-800 text-white">
 				<div className="container mx-auto px-4 text-center">
 					<motion.div

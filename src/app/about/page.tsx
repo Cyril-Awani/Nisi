@@ -185,26 +185,38 @@ export default function AboutPage() {
 					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
 						{[
 							{
-								name: 'David Okafor',
-								role: 'CEO & Founder',
+								name: 'Odoro Erivo',
+								role: 'CEO',
 								image: '/images/team/david.jpg',
 								bio: 'Telecommunications veteran with 15+ years experience in network infrastructure.',
 							},
 							{
-								name: 'Amina Yusuf',
+								name: 'Elo',
+								role: 'CFO',
+								image: '/images/team/grace.jpg',
+								bio: 'Heads our award-winning customer support team.',
+							},
+							{
+								name: 'Grant',
 								role: 'CTO',
 								image: '/images/team/amina.jpg',
 								bio: 'Leads our technical team with expertise in fiber optics and wireless technologies.',
 							},
 							{
-								name: 'James Okonkwo',
-								role: 'Operations Manager',
+								name: 'Udeme',
+								role: 'Technical Operations Manager',
 								image: '/images/team/james.jpg',
 								bio: 'Ensures seamless service delivery across all our coverage areas.',
 							},
 							{
-								name: 'Grace Eze',
+								name: 'Fejiro',
 								role: 'Customer Experience',
+								image: '/images/team/grace.jpg',
+								bio: 'Heads our award-winning customer support team.',
+							},
+							{
+								name: 'Ola',
+								role: 'Sales and Marketing',
 								image: '/images/team/grace.jpg',
 								bio: 'Heads our award-winning customer support team.',
 							},

@@ -91,7 +91,6 @@ export default function PlansPage() {
 
 	return (
 		<div className="bg-white">
-			{/* Hero Section */}
 			<section className="relative bg-purple-900 text-white py-20">
 				<div className="container mx-auto px-4 text-center">
 					<motion.h1
@@ -114,7 +113,6 @@ export default function PlansPage() {
 				</div>
 			</section>
 
-			{/* Special Offers */}
 			<section className="py-16 bg-gradient-to-r from-purple-600 to-purple-800 text-white">
 				<div className="container mx-auto px-4">
 					<motion.div
@@ -134,7 +132,6 @@ export default function PlansPage() {
 					</motion.div>
 
 					<div className="flex flex-col lg:flex-row items-center gap-8 max-w-5xl mx-auto">
-						{/* Image Card - Left Side */}
 						<motion.div
 							initial={{ opacity: 0, x: -50 }}
 							whileInView={{ opacity: 1, x: 0 }}
@@ -163,7 +160,6 @@ export default function PlansPage() {
 							</div>
 						</motion.div>
 
-						{/* Yearly Savings - Right Side */}
 						<motion.div
 							initial={{ opacity: 0, x: 50 }}
 							whileInView={{ opacity: 1, x: 0 }}
@@ -215,7 +211,6 @@ export default function PlansPage() {
 				</div>
 			</section>
 
-			{/* Package Plans */}
 			<section className="py-16">
 				<div className="container mx-auto px-4">
 					<motion.div
@@ -311,7 +306,6 @@ export default function PlansPage() {
 				</div>
 			</section>
 
-			{/* Add-Ons Section */}
 			<section className="py-16 bg-gray-50">
 				<div className="container mx-auto px-4">
 					<motion.div
@@ -392,7 +386,6 @@ export default function PlansPage() {
 				</div>
 			</section>
 
-			{/* CTA Section */}
 			<section className="py-16 bg-purple-800 text-white">
 				<div className="container mx-auto px-4 text-center">
 					<motion.div

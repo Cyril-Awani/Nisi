@@ -7,7 +7,6 @@ export default function Footer() {
 		<footer className="bg-purple-900 text-white pt-12 pb-8">
 			<div className="container mx-auto px-4">
 				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-					{/* Logo and Copyright */}
 					<div className="flex flex-col items-center md:items-start">
 						<div className="mb-2">
 							<Image
@@ -21,7 +20,6 @@ export default function Footer() {
 							Connecting you to the world...
 						</p>
 
-						{/* Social Media Icons */}
 						<div className="flex space-x-4 mt-2">
 							<Link
 								href="https://facebook.com/yourpage"
@@ -89,7 +87,6 @@ export default function Footer() {
 						</div>
 					</div>
 
-					{/* Quick Links */}
 					<div>
 						<h3 className="text-xl font-bold mb-4 border-b border-fuchsia-600 pb-2">
 							Quick Links
@@ -135,7 +132,6 @@ export default function Footer() {
 						</ul>
 					</div>
 
-					{/* Client Area */}
 					<div>
 						<h3 className="text-xl font-bold mb-4 border-b border-fuchsia-600 pb-2">
 							Client Area
@@ -179,7 +175,6 @@ export default function Footer() {
 						</ul>
 					</div>
 
-					{/* Contact Info */}
 					<div>
 						<h3 className="text-xl font-bold mb-4 border-b border-fuchsia-600 pb-2">
 							Contact Us
@@ -249,7 +244,6 @@ export default function Footer() {
 					</div>
 				</div>
 
-				{/* Copyright Section */}
 				<div className="border-t border-gray-800 pt-6 text-center">
 					<p className="text-gray-400">
 						Copyright © 2025 NISI TECHNOLOGIES. All Rights Reserved.

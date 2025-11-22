@@ -47,7 +47,6 @@ export default function Navbar() {
 	return (
 		<nav className="bg-white text-purple-800 sticky top-0 z-[9999] shadow-md">
 			<div className="container mx-auto px-4">
-				{/* Top row */}
 				<div className="flex justify-between items-center py-4 md:mx-20">
 					<Link href="/" className="flex items-center z-50">
 						<Image
@@ -59,7 +58,6 @@ export default function Navbar() {
 						/>
 					</Link>
 
-					{/* Desktop navigation */}
 					<div className="hidden md:flex space-x-6 items-center">
 						<NavLink href="/plans">Plans</NavLink>
 						<NavLink href="/coverage">Coverage</NavLink>
@@ -71,7 +69,6 @@ export default function Navbar() {
 						<ClientLoginModal onAction={() => setIsMenuOpen(false)} />
 					</div>
 
-					{/* Mobile menu button */}
 					<button
 						className="md:hidden text-purple-800 focus:outline-none z-50"
 						onClick={toggleMenu}
@@ -102,7 +99,6 @@ export default function Navbar() {
 					</button>
 				</div>
 
-				{/* Mobile menu */}
 				<AnimatePresence>
 					{isMenuOpen && (
 						<motion.div
