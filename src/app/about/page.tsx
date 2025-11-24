@@ -129,19 +129,16 @@ export default function AboutPage() {
 						{[
 							{
 								title: 'Reliability First',
-								icon: '🛡️',
 								description:
 									'We maintain 99.9% network uptime through continuous infrastructure investments and proactive maintenance.',
 							},
 							{
 								title: 'Community Focus',
-								icon: '🤝',
 								description:
-									'As a locally-owned business, we&apos;re committed to the economic growth and digital inclusion of our communities.',
+									"As a locally-owned business, we're committed to the economic growth and digital inclusion of our communities.",
 							},
 							{
 								title: 'Innovation Driven',
-								icon: '🚀',
 								description:
 									'We constantly explore new technologies to deliver faster speeds and better service at competitive prices.',
 							},
@@ -152,7 +149,6 @@ export default function AboutPage() {
 								whileHover={{ y: -10 }}
 								className="bg-white p-8 rounded-lg shadow-md text-center"
 							>
-								<div className="text-4xl mb-4">{item.icon}</div>
 								<h3 className="text-xl font-bold mb-3">{item.title}</h3>
 								<p className="text-gray-600">{item.description}</p>
 							</motion.div>

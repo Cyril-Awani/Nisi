@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import TermsModal from '@/components/TermsModal';
@@ -32,6 +32,11 @@ export default function InternetSignupProgress() {
 	const [formErrors, setFormErrors] = useState({
 		plan: false,
 	});
+
+	// Scroll to top when step changes
+	useEffect(() => {
+		window.scrollTo({ top: 0, behavior: 'smooth' });
+	}, [step]);
 
 	const plans = [
 		{
@@ -229,6 +234,59 @@ export default function InternetSignupProgress() {
 			currency: 'NGN',
 			minimumFractionDigits: 0,
 		}).format(amount);
+	};
+
+	// Function to preview uploaded file
+	const renderFilePreview = () => {
+		if (!formData.paymentProof) return null;
+
+		const file = formData.paymentProof;
+		const isImage = file.type.startsWith('image/');
+		const fileUrl = URL.createObjectURL(file);
+
+		return (
+			<div className="mt-4 p-4 border border-green-200 bg-green-50 rounded-lg">
+				<h4 className="font-medium text-green-800 mb-2">File Preview:</h4>
+				<div className="flex items-center space-x-4">
+					{isImage ? (
+						<img
+							src={fileUrl}
+							alt="Receipt preview"
+							className="w-32 h-32 object-cover rounded border"
+						/>
+					) : (
+						<div className="w-32 h-32 flex items-center justify-center bg-gray-100 rounded border">
+							<svg
+								className="w-12 h-12 text-gray-400"
+								fill="none"
+								stroke="currentColor"
+								viewBox="0 0 24 24"
+							>
+								<path
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									strokeWidth={2}
+									d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+								/>
+							</svg>
+						</div>
+					)}
+					<div className="flex-1">
+						<p className="font-medium text-gray-900">{file.name}</p>
+						<p className="text-sm text-gray-500">
+							{(file.size / 1024).toFixed(1)} KB • {file.type}
+						</p>
+						<button
+							type="button"
+							onClick={() => setFormData({ ...formData, paymentProof: null })}
+							className="mt-2 text-sm text-red-600 hover:text-red-800"
+						>
+							Remove File
+						</button>
+					</div>
+				</div>
+			</div>
+		);
 	};
 
 	return (
@@ -827,7 +885,7 @@ export default function InternetSignupProgress() {
 										Flutterwave Payment
 									</h3>
 									<p className="text-sm mb-4">
-										You`ll be redirected to Flutterwave`s secure payment page to
+										You'll be redirected to Flutterwave's secure payment page to
 										complete your transaction.
 									</p>
 									<button
@@ -981,6 +1039,9 @@ export default function InternetSignupProgress() {
 									)}
 								</div>
 
+								{/* File Preview Section */}
+								{renderFilePreview()}
+
 								<div className="bg-purple-50 p-4 rounded-lg">
 									<h3 className="font-medium mb-2">What happens next?</h3>
 									<ul className="text-sm space-y-1">
@@ -998,7 +1059,7 @@ export default function InternetSignupProgress() {
 													d="M5 13l4 4L19 7"
 												/>
 											</svg>
-											<span>We`ll verify your payment within 24 hours</span>
+											<span>We'll verify your payment within 24 hours</span>
 										</li>
 										<li className="flex items-start">
 											<svg
@@ -1033,19 +1094,141 @@ export default function InternetSignupProgress() {
 												/>
 											</svg>
 											<span>
-												You`ll receive a confirmation with installation date
+												You'll receive a confirmation with installation date
 											</span>
 										</li>
 									</ul>
 								</div>
 
+								{/* Submit Button for Step 3 */}
+								<div className="flex gap-4">
+									<button
+										type="button"
+										onClick={() => setStep(2)}
+										className="flex-1 bg-gray-300 text-gray-700 py-3 rounded-md hover:bg-gray-400 font-medium"
+									>
+										Back
+									</button>
+									<button
+										type="submit"
+										disabled={!formData.paymentProof}
+										className={`flex-1 bg-purple-600 text-white py-3 rounded-md font-medium ${
+											!formData.paymentProof
+												? 'opacity-50 cursor-not-allowed'
+												: 'hover:bg-purple-700'
+										}`}
+									>
+										Submit Receipt & Continue
+									</button>
+								</div>
+							</form>
+						</motion.div>
+					)}
+
+					{step === 4 && (
+						<motion.div
+							key="step4"
+							initial={{ opacity: 0, x: 50 }}
+							animate={{ opacity: 1, x: 0 }}
+							exit={{ opacity: 0, x: -50 }}
+							transition={{ duration: 0.3 }}
+						>
+							<h2 className="text-2xl font-bold mb-6 text-green-600">
+								Registration Complete!
+							</h2>
+
+							<div className="bg-green-50 border border-green-200 rounded-lg p-6 mb-6">
+								<div className="flex items-center mb-4">
+									<svg
+										className="h-8 w-8 text-green-500 mr-3"
+										fill="none"
+										stroke="currentColor"
+										viewBox="0 0 24 24"
+									>
+										<path
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											strokeWidth={2}
+											d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+										/>
+									</svg>
+									<h3 className="text-lg font-semibold text-green-800">
+										Thank you for choosing Nisi Technologies!
+									</h3>
+								</div>
+
+								<div className="space-y-3 text-sm">
+									<div className="flex justify-between">
+										<span className="text-gray-600">Invoice Number:</span>
+										<span className="font-medium">
+											{formData.invoiceNumber}
+										</span>
+									</div>
+									<div className="flex justify-between">
+										<span className="text-gray-600">Customer Name:</span>
+										<span className="font-medium">{formData.name}</span>
+									</div>
+									<div className="flex justify-between">
+										<span className="text-gray-600">Selected Plan:</span>
+										<span className="font-medium">
+											{plans.find((p) => p.id === formData.plan)?.name}
+										</span>
+									</div>
+									{formData.installationDate && (
+										<div className="flex justify-between">
+											<span className="text-gray-600">
+												Expected Installation:
+											</span>
+											<span className="font-medium">
+												{formData.installationDate}
+											</span>
+										</div>
+									)}
+								</div>
+							</div>
+
+							<div className="bg-blue-50 border-l-4 border-blue-400 p-4 mb-6">
+								<div className="flex">
+									<div className="flex-shrink-0">
+										<svg
+											className="h-5 w-5 text-blue-400"
+											fill="none"
+											stroke="currentColor"
+											viewBox="0 0 24 24"
+										>
+											<path
+												strokeLinecap="round"
+												strokeLinejoin="round"
+												strokeWidth={2}
+												d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+											/>
+										</svg>
+									</div>
+									<div className="ml-3">
+										<p className="text-sm text-blue-700">
+											<strong>Next Steps:</strong> Our team will contact you
+											within 24 hours to confirm your payment and schedule the
+											installation. Keep your invoice number handy for
+											reference.
+										</p>
+									</div>
+								</div>
+							</div>
+
+							<div className="flex gap-4">
 								<button
-									className="mt-6 bg-purple-600 text-white px-6 py-2 rounded-md hover:bg-purple-700 font-medium"
+									onClick={downloadInvoice}
+									className="flex-1 bg-purple-600 text-white py-3 rounded-md hover:bg-purple-700 font-medium"
+								>
+									Download Invoice
+								</button>
+								<button
 									onClick={() => router.push('/')}
+									className="flex-1 bg-gray-600 text-white py-3 rounded-md hover:bg-gray-700 font-medium"
 								>
 									Back to Homepage
 								</button>
-							</form>
+							</div>
 						</motion.div>
 					)}
 				</AnimatePresence>
