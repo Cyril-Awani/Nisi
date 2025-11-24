@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import TermsModal from '@/components/TermsModal';
 
 export default function InternetSignupProgress() {
@@ -249,9 +250,11 @@ export default function InternetSignupProgress() {
 				<h4 className="font-medium text-green-800 mb-2">File Preview:</h4>
 				<div className="flex items-center space-x-4">
 					{isImage ? (
-						<img
+						<Image
 							src={fileUrl}
 							alt="Receipt preview"
+							width={128}
+							height={128}
 							className="w-32 h-32 object-cover rounded border"
 						/>
 					) : (
@@ -885,8 +888,8 @@ export default function InternetSignupProgress() {
 										Flutterwave Payment
 									</h3>
 									<p className="text-sm mb-4">
-										You'll be redirected to Flutterwave's secure payment page to
-										complete your transaction.
+										You&apos;ll be redirected to Flutterwave&apos;s secure
+										payment page to complete your transaction.
 									</p>
 									<button
 										className="w-full bg-purple-600 text-white py-3 rounded-md hover:bg-purple-700 font-medium"
@@ -951,7 +954,7 @@ export default function InternetSignupProgress() {
 								}`}
 							>
 								{formData.paymentMethod === 'flutterwave'
-									? "I've Completed Payment - Continue"
+									? 'I&apos;ve Completed Payment - Continue'
 									: 'Continue to Receipt Upload'}
 							</button>
 						</motion.div>
@@ -1059,7 +1062,9 @@ export default function InternetSignupProgress() {
 													d="M5 13l4 4L19 7"
 												/>
 											</svg>
-											<span>We'll verify your payment within 24 hours</span>
+											<span>
+												We&apos;ll verify your payment within 24 hours
+											</span>
 										</li>
 										<li className="flex items-start">
 											<svg
@@ -1094,7 +1099,8 @@ export default function InternetSignupProgress() {
 												/>
 											</svg>
 											<span>
-												You'll receive a confirmation with installation date
+												You&apos;ll receive a confirmation with installation
+												date
 											</span>
 										</li>
 									</ul>
