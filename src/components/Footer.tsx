@@ -10,7 +10,7 @@ export default function Footer() {
 					<div className="flex flex-col items-center md:items-start">
 						<div className="mb-2">
 							<Image
-								src="/images/nisi-wht.svg"
+								src="/images/nisi-logo.png"
 								alt="NISI Logo"
 								width={120}
 								height={70}

@@ -3,8 +3,8 @@ export const sampleClientData = {
 	email: 'client@example.com',
 	password: '123',
 	clientInfo: {
-		name: 'William Dunchez',
-		email: 'william.dunchez@example.com',
+		name: 'Cyril Test',
+		email: 'client@example.com',
 		id: 'CLIENT-001',
 		subscription: 'Nisi Gold',
 		subscriptionStart: '2025-01-01',
@@ -22,7 +22,7 @@ export const sampleClientData = {
 		price: '₦32,197.00/month',
 		billing: {
 			cardLastFour: '2876',
-			cardName: 'William Dunchez',
+			cardName: 'Ola Adero',
 			expDate: '02/27',
 			status: 'active',
 		},
