@@ -1,8 +1,11 @@
+// components/ClientLoginModal.tsx
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
+import { sampleClientData } from '@/data/clientData';
+import { useClient } from '@/contexts/ClientContext';
 
 interface ClientLoginModalProps {
 	onAction?: () => void;
@@ -21,6 +24,7 @@ export default function ClientLoginModal({
 	const [error, setError] = useState('');
 	const modalRef = useRef<HTMLDivElement>(null);
 	const router = useRouter();
+	const { login } = useClient();
 
 	useEffect(() => {
 		function handleClickOutside(event: MouseEvent) {
@@ -49,11 +53,24 @@ export default function ClientLoginModal({
 		setError('');
 
 		try {
+			// Simulate API call
 			await new Promise((resolve) => setTimeout(resolve, 1500));
-			setIsOpen(false);
-			onAction?.();
-		} catch {
-			setError('Invalid email or password. Please try again.');
+
+			if (
+				email === sampleClientData.email &&
+				password === sampleClientData.password
+			) {
+				const dummyClientData = sampleClientData.clientInfo;
+				login(dummyClientData);
+				setIsOpen(false);
+				onAction?.();
+				// Redirect to dashboard after successful login
+				router.push('/client');
+			} else {
+				setError('Invalid email or password. Please try again.');
+			}
+		} catch (err) {
+			setError('An unexpected error occurred. Please try again later.');
 		} finally {
 			setIsLoading(false);
 		}

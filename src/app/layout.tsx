@@ -1,9 +1,9 @@
+// app/layout.tsx
 import type { Metadata } from 'next';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import { Poppins } from 'next/font/google';
 import './globals.css';
-import TopBarWrapper from '@/components/TopBarWrapper';
+import { ClientProvider } from '@/contexts/ClientContext';
+import LayoutWrapper from '@/components/LayoutWrapper';
 
 const poppins = Poppins({
 	subsets: ['latin'],
@@ -24,10 +24,9 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={`${poppins.variable} font-sans antialiased`}>
-				<TopBarWrapper />
-				<Navbar />
-				<main>{children}</main>
-				<Footer />
+				<ClientProvider>
+					<LayoutWrapper>{children}</LayoutWrapper>
+				</ClientProvider>
 			</body>
 		</html>
 	);

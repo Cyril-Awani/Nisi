@@ -1,3 +1,4 @@
+// components/Navbar.tsx
 'use client';
 
 import Link from 'next/link';
@@ -5,11 +6,18 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ClientLoginModal from './ClientLoginModal';
+import { useClient } from '@/contexts/ClientContext';
 
 export default function Navbar() {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
+	const { isLoggedIn, clientData, logout } = useClient();
 
 	const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+	const handleLogout = () => {
+		logout();
+		setIsMenuOpen(false);
+	};
 
 	const menuVariants = {
 		open: {
@@ -66,7 +74,19 @@ export default function Navbar() {
 
 						<div className="h-6 w-px bg-purple-800 mx-2"></div>
 
-						<ClientLoginModal onAction={() => setIsMenuOpen(false)} />
+						{!isLoggedIn ? (
+							<ClientLoginModal onAction={() => setIsMenuOpen(false)} />
+						) : (
+							<div className="flex items-center space-x-6">
+								<NavLink href="/client">Dashboard</NavLink>
+								<button
+									onClick={handleLogout}
+									className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
+								>
+									Logout
+								</button>
+							</div>
+						)}
 					</div>
 
 					<button
@@ -140,9 +160,61 @@ export default function Navbar() {
 									<hr className="border-purple-300 my-4" />
 								</motion.div>
 
-								<motion.div variants={linkVariants}>
-									<ClientLoginModal onAction={() => setIsMenuOpen(false)} />
-								</motion.div>
+								{!isLoggedIn ? (
+									<motion.div variants={linkVariants}>
+										<ClientLoginModal onAction={() => setIsMenuOpen(false)} />
+									</motion.div>
+								) : (
+									<motion.div
+										className="flex flex-col h-full text-purple-800"
+										variants={{
+											open: {
+												transition: {
+													staggerChildren: 0.1,
+													delayChildren: 0.2,
+												},
+											},
+											closed: {
+												transition: {
+													staggerChildren: 0.05,
+													staggerDirection: -1,
+												},
+											},
+										}}
+									>
+										{[
+											{ href: '/client-dashboard', label: 'Dashboard' },
+											{ href: '/request-support', label: 'Request Support' },
+											{ href: '/pay-subscription', label: 'Pay Subscription' },
+											{ href: '/refer-a-friend', label: 'Refer a Friend' },
+											{ href: '/billing-usage', label: 'Billing and Usage' },
+										].map((link) => (
+											<motion.div key={link.href} variants={linkVariants}>
+												<Link
+													href={link.href}
+													className="block text-2xl py-4 hover:text-purple-500 border-purple-200"
+													onClick={toggleMenu}
+												>
+													{link.label}
+												</Link>
+											</motion.div>
+										))}
+										<motion.div variants={linkVariants}>
+											<hr className="border-purple-300 my-4" />
+										</motion.div>
+										<motion.div variants={linkVariants}>
+											<button
+												onClick={() => {
+													handleLogout();
+													toggleMenu();
+												}}
+												className="block text-2xl py-4 hover:text-red-500 border-purple-200 w-full text-left"
+											>
+												Logout
+											</button>
+										</motion.div>
+									</motion.div>
+								)}
 							</motion.div>
 						</motion.div>
 					)}
