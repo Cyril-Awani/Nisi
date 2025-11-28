@@ -10,7 +10,7 @@ import {
 	X,
 	User,
 } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import Image from 'next/image';
 import { useRouter, usePathname } from 'next/navigation';
 import { useClient } from '@/contexts/ClientContext';
@@ -24,10 +24,14 @@ export default function Sidebar() {
 	const router = useRouter();
 	const pathname = usePathname();
 
-	const menuItems = [
-		{ name: 'Dashboard', icon: LayoutDashboard, path: '/client' },
-		{ name: 'Billings', icon: Receipt, path: '/client/billing' },
-	];
+	// Use useMemo to prevent unnecessary recreations of menuItems
+	const menuItems = useMemo(
+		() => [
+			{ name: 'Dashboard', icon: LayoutDashboard, path: '/client' },
+			{ name: 'Billings', icon: Receipt, path: '/client/billing' },
+		],
+		[]
+	);
 
 	// Update active item based on current pathname
 	useEffect(() => {
@@ -49,7 +53,7 @@ export default function Sidebar() {
 			setActiveItem('Support');
 			setSupportOpen(true);
 		}
-	}, [pathname]);
+	}, [pathname, menuItems]); // Added menuItems to dependency array
 
 	const handleNavigation = (path: string, name: string) => {
 		setActiveItem(name);

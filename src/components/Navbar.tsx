@@ -19,14 +19,28 @@ export default function Navbar() {
 		setIsMenuOpen(false);
 	};
 
+	const getInitials = (name: string) => {
+		return name
+			.split(' ')
+			.map((word) => word[0])
+			.join('')
+			.toUpperCase()
+			.slice(0, 2);
+	};
+
 	const menuVariants = {
 		open: {
 			x: 0,
-			transition: { type: 'spring', stiffness: 300, damping: 30 },
+			transition: { type: 'spring' as const, stiffness: 300, damping: 30 },
 		},
 		closed: {
 			x: '-100%',
-			transition: { type: 'spring', stiffness: 300, damping: 30, delay: 0.1 },
+			transition: {
+				type: 'spring' as const,
+				stiffness: 300,
+				damping: 30,
+				delay: 0.1,
+			},
 		},
 	};
 
@@ -78,7 +92,20 @@ export default function Navbar() {
 							<ClientLoginModal onAction={() => setIsMenuOpen(false)} />
 						) : (
 							<div className="flex items-center space-x-6">
-								<NavLink href="/client">Dashboard</NavLink>
+								{/* Avatar with client name */}
+								<Link
+									href="/client"
+									className="flex items-center gap-3 px-3 py-2 rounded-lg transition-colors hover:bg-purple-50"
+								>
+									<div className="w-8 h-8 rounded-full bg-purple-500 flex items-center justify-center flex-shrink-0">
+										<span className="text-white font-semibold text-sm">
+											{clientData ? getInitials(clientData.name) : 'U'}
+										</span>
+									</div>
+									<span className="text-purple-800 font-medium text-sm">
+										{clientData?.name || 'User'}
+									</span>
+								</Link>
 								<button
 									onClick={handleLogout}
 									className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
@@ -182,8 +209,31 @@ export default function Navbar() {
 											},
 										}}
 									>
+										{/* Mobile Avatar Section */}
+										<motion.div variants={linkVariants}>
+											<Link
+												href="/client"
+												className="flex items-center gap-4 py-4 border-b border-purple-200"
+												onClick={toggleMenu}
+											>
+												<div className="w-12 h-12 rounded-full bg-purple-500 flex items-center justify-center flex-shrink-0">
+													<span className="text-white font-semibold text-base">
+														{clientData ? getInitials(clientData.name) : 'U'}
+													</span>
+												</div>
+												<div className="text-left">
+													<p className="text-xl font-semibold text-purple-800">
+														{clientData?.name || 'User'}
+													</p>
+													<p className="text-sm text-purple-600">
+														{clientData?.subscription || 'Client'}
+													</p>
+												</div>
+											</Link>
+										</motion.div>
+
 										{[
-											{ href: '/client-dashboard', label: 'Dashboard' },
+											{ href: '/client', label: 'Dashboard' },
 											{ href: '/request-support', label: 'Request Support' },
 											{ href: '/pay-subscription', label: 'Pay Subscription' },
 											{ href: '/refer-a-friend', label: 'Refer a Friend' },

@@ -3,15 +3,48 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
+interface UsageData {
+	upload: string;
+	download: string;
+	total: string;
+	remaining: string;
+	cycleEnd: string;
+	percentageUsed: number;
+}
+
+interface BillingData {
+	cardLastFour: string;
+	cardName: string;
+	expDate: string;
+	status: string;
+}
+
+interface NetworkData {
+	macId: string;
+	signalStrength: number;
+	location: string;
+	ipAddress: string;
+	connectionType: string;
+}
+
 interface ClientData {
 	name: string;
 	email: string;
 	id: string;
 	subscription: string;
+	subscriptionStart: string;
 	expirationDate: string;
 	invoices: string[];
 	notifications: string[];
-	usage: string;
+	joinDate: string;
+	lastLogin: string;
+	devices: number;
+	dataUsage: string;
+	speed: string;
+	price: string;
+	billing: BillingData;
+	network: NetworkData;
+	usage: UsageData;
 }
 
 interface ClientContextType {

@@ -1,6 +1,6 @@
 'use client';
 
-import { Users, Copy, Check, ExternalLink } from 'lucide-react';
+import { Users, Copy, Check } from 'lucide-react';
 import { useState } from 'react';
 import { useClient } from '@/contexts/ClientContext';
 

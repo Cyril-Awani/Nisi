@@ -4,7 +4,7 @@ const features = [
 	{
 		title: 'Fast Speeds',
 		description:
-			'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
+			'Experience high-performance internet speeds optimized for streaming, gaming, cloud work, and daily browsing without interruptions.',
 		icon: (
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
@@ -25,7 +25,7 @@ const features = [
 	{
 		title: 'Seamless Installation',
 		description:
-			'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.',
+			'Enjoy a smooth and quick installation process handled by our expert technicians, ensuring everything works perfectly from day one.',
 		icon: (
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
@@ -46,7 +46,7 @@ const features = [
 	{
 		title: 'Uptime Guarantee',
 		description:
-			'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
+			'Stay connected around the clock with our stable network infrastructure designed to deliver consistent performance every day.',
 		icon: (
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
@@ -67,7 +67,7 @@ const features = [
 	{
 		title: '24/7 Support',
 		description:
-			'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
+			'Get assistance whenever needed. Our dedicated support team is always available to help resolve issues and keep you online.',
 		icon: (
 			<svg
 				xmlns="http://www.w3.org/2000/svg"

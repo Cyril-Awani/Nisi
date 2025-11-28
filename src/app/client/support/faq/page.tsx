@@ -159,13 +159,13 @@ export default function FAQPage() {
 					id: 'bill-2',
 					question: 'When will I be billed?',
 					answer:
-						"Billing occurs monthly on the same date you signed up. You'll receive an invoice via email 7 days before your payment is due.",
+						'Billing occurs monthly on the same date you signed up. You&apos;ll receive an invoice via email 7 days before your payment is due.',
 				},
 				{
 					id: 'bill-3',
 					question: 'What happens if my payment is late?',
 					answer:
-						"We provide a 3-day grace period after your due date. If payment isn't received within 3 days, service may be temporarily suspended until payment is made. A reconnection fee may apply.",
+						'We provide a 3-day grace period after your due date. If payment isn&apos;t received within 3 days, service may be temporarily suspended until payment is made. A reconnection fee may apply.',
 				},
 				{
 					id: 'bill-4',
@@ -229,7 +229,7 @@ export default function FAQPage() {
 							</ol>
 							<p className="text-sm text-gray-600 mt-2">
 								If issues persist, contact our support team with details of what
-								you've tried.
+								you&apos;ve tried.
 							</p>
 						</div>
 					),
@@ -359,7 +359,7 @@ export default function FAQPage() {
 					</h2>
 					<p className="text-gray-600 mb-6 max-w-2xl mx-auto">
 						Our support team is ready to assist you with any questions or issues
-						you might have. We're committed to providing you with the best
+						you might have. We&apos;re committed to providing you with the best
 						service experience.
 					</p>
 					{/* Contact Quick Actions */}

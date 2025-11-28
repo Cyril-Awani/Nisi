@@ -14,14 +14,13 @@ export default function ProfilePage() {
 			phone: '+234 812 345 6789',
 			alternatePhone: '+234 807 654 3210',
 			address: '123 Victoria Island, Lagos, Nigeria',
-			joinDate: clientData?.clientInfo?.joinDate || '2023-01-15',
+			joinDate: clientData?.joinDate || '2023-01-15',
 		},
 		accountInfo: {
-			clientId: clientData?.clientInfo?.id || 'CLIENT-001',
-			subscription: clientData?.clientInfo?.subscription || 'Nisi Gold',
-			subscriptionStart:
-				clientData?.clientInfo?.subscriptionStart || '2025-01-01',
-			expirationDate: clientData?.clientInfo?.expirationDate || '2025-12-31',
+			clientId: clientData?.id || 'CLIENT-001',
+			subscription: clientData?.subscription || 'Nisi Gold',
+			subscriptionStart: clientData?.subscriptionStart || '2025-01-01',
+			expirationDate: clientData?.expirationDate || '2025-12-31',
 			status: 'Active',
 		},
 		referralInfo: {
@@ -32,9 +31,9 @@ export default function ProfilePage() {
 			referralCode: 'NISI-WD001',
 		},
 		usageStats: {
-			dataUsage: clientData?.clientInfo?.dataUsage || '245GB / 300GB',
-			devices: clientData?.clientInfo?.devices || 3,
-			lastLogin: clientData?.clientInfo?.lastLogin || '2024-01-20',
+			dataUsage: clientData?.dataUsage || '245GB / 300GB',
+			devices: clientData?.devices || 3,
+			lastLogin: clientData?.lastLogin || '2024-01-20',
 		},
 	};
 

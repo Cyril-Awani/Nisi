@@ -20,22 +20,27 @@ export const sampleClientData = {
 		dataUsage: '245GB / 300GB',
 		speed: '20mbps',
 		price: '₦32,197.00/month',
-		// Billing information
 		billing: {
 			cardLastFour: '2876',
 			cardName: 'William Dunchez',
 			expDate: '02/27',
 			status: 'active',
 		},
-		// Network information
-		// data/clientData.ts - Network section remains the same
 		network: {
 			macId: '00:1B:44:11:3A:B7',
 			signalStrength: -45,
 			location: 'Lagos, Nigeria',
-			// status is now dynamically calculated
+
 			ipAddress: '192.168.1.100',
 			connectionType: 'Wireless',
+		},
+		usage: {
+			upload: '45 GB',
+			download: '111 GB',
+			total: '156 GB',
+			remaining: '844 GB',
+			cycleEnd: '2025-01-14',
+			percentageUsed: 15.6,
 		},
 	},
 };

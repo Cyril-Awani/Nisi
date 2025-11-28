@@ -87,44 +87,42 @@ export default function BillingPage() {
 	// Get billing data from clientData with fallbacks
 	const billingData = {
 		currentPlan: {
-			name: clientData?.clientInfo?.subscription || 'Nisi Gold',
-			price: clientData?.clientInfo?.price || '₦32,197.00',
+			name: clientData?.subscription || 'Nisi Gold',
+			price: clientData?.price || '₦32,197.00',
 			billingCycle: 'Monthly',
-			nextBillingDate: clientData?.clientInfo?.expirationDate || '2024-02-15',
-			status: clientData?.clientInfo?.billing?.status || 'active',
+			nextBillingDate: clientData?.expirationDate || '2024-02-15',
+			status: clientData?.billing?.status || 'active',
 		},
 		paymentMethod: {
 			type: 'VISA',
-			lastFour: clientData?.clientInfo?.billing?.cardLastFour || '2876',
-			expiry: clientData?.clientInfo?.billing?.expDate || '02/27',
+			lastFour: clientData?.billing?.cardLastFour || '2876',
+			expiry: clientData?.billing?.expDate || '02/27',
 			name:
-				clientData?.clientInfo?.billing?.cardName ||
-				clientData?.clientInfo?.name ||
-				'William Dunchez',
+				clientData?.billing?.cardName || clientData?.name || 'William Dunchez',
 		},
 		billingHistory: [
 			{
 				id: 'INV-001',
 				date: '2024-01-15',
-				amount: clientData?.clientInfo?.price || '₦32,197.00',
+				amount: clientData?.price || '₦32,197.00',
 				status: 'pending' as const,
-				plan: clientData?.clientInfo?.subscription || 'Nisi Gold',
+				plan: clientData?.subscription || 'Nisi Gold',
 				downloadUrl: '#',
 			},
 			{
 				id: 'INV-002',
 				date: '2023-12-15',
-				amount: clientData?.clientInfo?.price || '₦32,197.00',
+				amount: clientData?.price || '₦32,197.00',
 				status: 'overdue' as const,
-				plan: clientData?.clientInfo?.subscription || 'Nisi Gold',
+				plan: clientData?.subscription || 'Nisi Gold',
 				downloadUrl: '#',
 			},
 			{
 				id: 'INV-003',
 				date: '2023-11-15',
-				amount: clientData?.clientInfo?.price || '₦32,197.00',
+				amount: clientData?.price || '₦32,197.00',
 				status: 'paid' as const,
-				plan: clientData?.clientInfo?.subscription || 'Nisi Gold',
+				plan: clientData?.subscription || 'Nisi Gold',
 				downloadUrl: '#',
 			},
 		],

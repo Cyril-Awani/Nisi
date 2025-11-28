@@ -69,7 +69,7 @@ export default function ClientLoginModal({
 			} else {
 				setError('Invalid email or password. Please try again.');
 			}
-		} catch (err) {
+		} catch {
 			setError('An unexpected error occurred. Please try again later.');
 		} finally {
 			setIsLoading(false);
