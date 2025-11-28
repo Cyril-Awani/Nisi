@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { sampleClientData } from '@/data/clientData';
 import { useClient } from '@/contexts/ClientContext';
+import { Eye, EyeOff } from 'lucide-react';
 
 interface ClientLoginModalProps {
 	onAction?: () => void;
@@ -19,6 +20,7 @@ export default function ClientLoginModal({
 	const [isOpen, setIsOpen] = useState(false);
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const [showPassword, setShowPassword] = useState(false);
 	const [rememberMe, setRememberMe] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState('');
@@ -80,6 +82,10 @@ export default function ClientLoginModal({
 		setIsOpen(false);
 		onAction?.();
 		router.push(path);
+	};
+
+	const togglePasswordVisibility = () => {
+		setShowPassword(!showPassword);
 	};
 
 	return (
@@ -159,14 +165,27 @@ export default function ClientLoginModal({
 									>
 										Password
 									</label>
-									<input
-										type="password"
-										id="password"
-										value={password}
-										onChange={(e) => setPassword(e.target.value)}
-										className="w-full px-3 py-2 border border-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-										required
-									/>
+									<div className="relative">
+										<input
+											type={showPassword ? 'text' : 'password'}
+											id="password"
+											value={password}
+											onChange={(e) => setPassword(e.target.value)}
+											className="w-full px-3 py-2 border border-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 pr-10"
+											required
+										/>
+										<button
+											type="button"
+											onClick={togglePasswordVisibility}
+											className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-700"
+										>
+											{showPassword ? (
+												<EyeOff size={18} className="text-white" />
+											) : (
+												<Eye size={18} className="text-white" />
+											)}
+										</button>
+									</div>
 								</div>
 
 								<div className="flex items-center justify-between mb-6">
