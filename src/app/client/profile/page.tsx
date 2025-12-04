@@ -2,6 +2,7 @@
 
 import { useClient } from '@/contexts/ClientContext';
 import { User, Mail, Phone, MapPin, Calendar, Users, Edit } from 'lucide-react';
+import { PageHeader } from '../components/page-header';
 
 export default function ProfilePage() {
 	const { clientData } = useClient();
@@ -41,12 +42,11 @@ export default function ProfilePage() {
 		<div className="min-h-screen bg-gray-50 py-8">
 			<div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
 				{/* Header */}
-				<div className="mb-8">
-					<h1 className="text-3xl font-bold text-gray-900">User Profile</h1>
-					<p className="text-gray-600 mt-2">
-						Manage your personal information and account settings
-					</p>
-				</div>
+				<PageHeader
+					title="User Profile"
+					description="Manage your personal information and account settings"
+					icon={User}
+				/>
 
 				<div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 					{/* Left Column - Profile Overview */}

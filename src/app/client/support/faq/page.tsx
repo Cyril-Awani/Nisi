@@ -10,8 +10,6 @@ import {
 	CreditCard,
 	Settings,
 	Phone,
-	Mail,
-	MessageCircle,
 } from 'lucide-react';
 
 export default function FAQPage() {
@@ -350,65 +348,6 @@ export default function FAQPage() {
 							</div>
 						);
 					})}
-				</div>
-
-				{/* Still Need Help Section */}
-				<div className="bg-purple-50 rounded-lg p-8 mt-12 text-center">
-					<h2 className="text-2xl font-bold text-gray-900 mb-4">
-						Still Need Help?
-					</h2>
-					<p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-						Our support team is ready to assist you with any questions or issues
-						you might have. We&apos;re committed to providing you with the best
-						service experience.
-					</p>
-					{/* Contact Quick Actions */}
-					<div className="grid grid-cols-3 gap-2 mb-2 px-2">
-						<div className="bg-white rounded-lg p-4 sm:p-6 text-center border border-gray-200">
-							<Phone className="sm:w-8 sm:h-8 w-6 h-6 text-purple-500 mx-auto mb-3 sm:mb-3 mb-2" />
-							<h3 className="font-semibold text-gray-900 mb-2 text-sm sm:text-base">
-								Call Support
-							</h3>
-							<p className="text-gray-600 text-[10px] sm:text-sm mb-1">
-								24/7 Customer Service
-							</p>
-							<a
-								href="tel:+2349048717653"
-								className="text-purple-500 font-medium hover:text-purple-600 text-xs"
-							>
-								Call
-							</a>
-						</div>
-
-						<div className="bg-white rounded-lg p-4 sm:p-6 text-center border border-gray-200">
-							<MessageCircle className=" sm:w-8 sm:h-8 w-6 h-6 text-purple-500 mx-auto mb-3 sm:mb-3 mb-2" />
-							<h3 className="font-semibold text-gray-900 mb-2 text-sm sm:text-base">
-								Live Chat
-							</h3>
-							<p className="text-gray-600 text-[10px] sm:text-sm mb-1">
-								Instant Help Online
-							</p>
-							<button className="text-purple-500 font-medium hover:text-purple-600 text-xs">
-								Start Chat
-							</button>
-						</div>
-
-						<div className="bg-white rounded-lg p-4 sm:p-6 text-center border border-gray-200">
-							<Mail className="sm:w-8 sm:h-8 w-6 h-6 text-purple-500 mx-auto mb-3 sm:mb-3 mb-2" />
-							<h3 className="font-semibold text-gray-900 mb-2 text-sm sm:text-base">
-								Email Us
-							</h3>
-							<p className="text-gray-600 text-[10px] sm:text-sm mb-1">
-								Detailed Inquiries
-							</p>
-							<a
-								href="mailto:support@nisitechologies.com"
-								className="text-purple-500 font-medium hover:text-purple-600 text-xs"
-							>
-								Send Email
-							</a>
-						</div>
-					</div>
 				</div>
 			</div>
 		</div>

@@ -12,8 +12,10 @@ import {
 	Building,
 	Zap,
 	Battery,
+	BarChart3,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { PageHeader } from '../components/page-header';
 
 export default function BillingPage() {
 	const { clientData } = useClient();
@@ -158,16 +160,13 @@ export default function BillingPage() {
 	const IconComponent = currentAd.icon;
 
 	return (
-		<div className="min-h-screen bg-gray-50">
+		<div className="w-full bg-white border-b border-gray-200 pt-16 lg:pt-6 p-4 sm:p-6 lg:pl-6">
 			{/* Header */}
-			<div className="bg-white border-b border-gray-200 px-6 py-6 pt-20 md:pt-6">
-				<h1 className="text-3xl md:text-xl font-bold text-gray-900">
-					Billing & Payments
-				</h1>
-				<p className="text-xs text-gray-600 mt-1">
-					Manage your subscription and payment methods
-				</p>
-			</div>
+			<PageHeader
+				title="Billing & Payments"
+				description="Manage Your Subscriptions and Payment Methods"
+				icon={BarChart3}
+			/>
 
 			<div className="p-2">
 				{/* Top Section - Current Plan, Payment Method, and Add-ons */}
@@ -216,7 +215,7 @@ export default function BillingPage() {
 
 							<div className="flex flex-col sm:flex-row gap-3 mb-4">
 								<button className="flex-1 bg-purple-500 text-white py-3 px-4 rounded-lg font-medium hover:bg-emerald-600 transition-colors">
-									Upgrade Plan
+									Manage Plan
 								</button>
 								<button className="flex-1 border border-gray-300 text-gray-700 py-3 px-4 rounded-lg font-medium hover:bg-gray-50 transition-colors">
 									Suspend Subscription

@@ -3,6 +3,7 @@ export const sampleClientData = {
 	email: 'client@example.com',
 	password: '123',
 	clientInfo: {
+		userId: 'CLIENT-001',
 		name: 'Cyril Test',
 		email: 'client@example.com',
 		id: 'CLIENT-001',
